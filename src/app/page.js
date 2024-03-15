@@ -6,7 +6,7 @@ import { styled } from "@mui/material/styles";
 import Button from "@mui/material/Button";
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import Navbar from "../../components/templates/navbar";
-import Search from "../../components/templates/search";
+import Search from "../../components/modules/search";
 import StoreList from "../../components/templates/storeList";
 import Timeline from "../../components/modules/timeline";
 import Footer from "../../components/modules/footer";

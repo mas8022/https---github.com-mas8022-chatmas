@@ -19,7 +19,9 @@ export default function Footer() {
       <div className={style.storeListItem}>
         <FontAwesomeIcon style={{ fontSize: "21px" }} icon={faPlus} />
       </div>
-      <FontAwesomeIcon className={style.footer__icons} icon={faHeart} />
+      <Link href={"/favorite"}>
+        <FontAwesomeIcon className={style.footer__icons} icon={faHeart} />
+      </Link>
       <Link href={"/profile"}>
         <FontAwesomeIcon className={style.footer__icons} icon={faUser} />
       </Link>
