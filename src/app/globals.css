@@ -19,5 +19,6 @@
     body{
         width: 100%;
         background-image: linear-gradient(to bottom, #fff, #e5ffe3);
+        min-height: 100vh;
     }
 }

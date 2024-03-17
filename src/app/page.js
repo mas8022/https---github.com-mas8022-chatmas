@@ -9,7 +9,6 @@ import Navbar from "../../components/templates/navbar";
 import Search from "../../components/modules/search";
 import StoreList from "../../components/templates/storeList";
 import Timeline from "../../components/modules/timeline";
-import Footer from "../../components/modules/footer";
 const emailRegex = /[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}/;
 export default function Home() {
   const [pageMode, setPageMode] = useState(() => {
@@ -114,7 +113,6 @@ export default function Home() {
         <Search />
         <StoreList />
         <Timeline />
-        <Footer />
       </div>
     </>
   ) : (

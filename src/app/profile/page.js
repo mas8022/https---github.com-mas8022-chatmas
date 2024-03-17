@@ -1,13 +1,12 @@
 import React from "react";
 import Timeline from "../../../components/modules/timeline";
+import ProfileTopBottoms from "../../../components/templates/profileTopBottoms";
+import Scroller from "../../../components/modules/scroller";
 
 export default function Profile() {
   return (
-    <div className="w-full p-[3rem] flex flex-col gap-y-5">
-      <div className="w-[100%] h-[10rem] flex items-center justify-between">
-        <img src="/images/arrow-left.svg" alt="back" />
-        <img src="/images/more.svg" alt="more" />
-      </div>
+    <div className="w-full p-[3rem] flex flex-col gap-y-5 pb-[10rem]">
+      <ProfileTopBottoms />
 
       <div className="h-[10.5rem] w-[100%] flex items-center gap-6">
         <img
@@ -48,7 +47,7 @@ export default function Profile() {
         </div>
       </div>
 
-      <div className="flex items-center justify-between w-[100%] h-[5rem] gap-[2rem]">
+      <div className="flex items-center justify-between w-[100%] h-[5rem] gap-[2rem] mb-12">
         <div
           style={{
             background:
@@ -62,7 +61,7 @@ export default function Profile() {
           + Follow
         </div>
       </div>
-      <Timeline/>
+      <Timeline />
     </div>
   );
 }
