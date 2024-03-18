@@ -20,9 +20,9 @@ export default function Message() {
 
       <div className="w-full h-1 bg-gradient-to-r from-[#e5ffe3] to-slate-50 mb-12"></div>
       <div className="w-full flex flex-col gap-10 px-12">
+        <Text text={"hello frgtsrgdf dfsgdfsgf dsfgdfg dfgfsdgsfdg fgsdfsd fsd dsf hossein khobi"} />
         <Text text={"hello hossein khobi"} />
-        <Text text={"hello hossein khobi"} />
-        <Text text={"hello hossein khobi"} />
+        <Text text={"hello hossein efrsadfsdf khobi"} />
       </div>
     </div>
   );

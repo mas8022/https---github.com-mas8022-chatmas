@@ -2,6 +2,7 @@ import React from "react";
 import Timeline from "../../../components/modules/timeline";
 import ProfileTopBottoms from "../../../components/templates/profileTopBottoms";
 import Scroller from "../../../components/modules/scroller";
+import Link from "next/link";
 
 export default function Profile() {
   return (
@@ -48,15 +49,16 @@ export default function Profile() {
       </div>
 
       <div className="flex items-center justify-between w-[100%] h-[5rem] gap-[2rem] mb-12">
-        <div
+        <Link
           style={{
             background:
               "linear-gradient(to right, #cffa7c 0%, #9ce89d 100%), linear-gradient(to bottom, #e5e6ed, #e5e6ed)",
           }}
           className="rounded-[30px] flex items-center justify-center w-[18rem] h-[100%] font-medium text-[16px] text-[#191919]"
+          href={"/message"}
         >
           Message
-        </div>
+        </Link>
         <div className="rounded-[30px] flex items-center justify-center w-[11.2rem] h-[100%] bg-[#fff] font-bold text-[16px] text-[#606a81]">
           + Follow
         </div>

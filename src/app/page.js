@@ -67,7 +67,7 @@ export default function Home() {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(values),
-      });
+      }).then(res => console.log(res))
 
       setFlagModal(false);
       setPageMode(true);
