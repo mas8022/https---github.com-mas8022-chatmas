@@ -1,9 +1,10 @@
 import React from "react";
 import Text from "../../../components/modules/text";
+import MessageBox from "../../../components/templates/messageBox";
 
 export default function Message() {
   return (
-    <div className="w-full h-full">
+    <div className="w-full h-full flex items-center flex-col">
       <div className="w-full h-[10rem] flex items-center gap-5 px-11">
         <img
           className="rounded-[50%] w-[7rem] h-[7rem]"
@@ -20,10 +21,16 @@ export default function Message() {
 
       <div className="w-full h-1 bg-gradient-to-r from-[#e5ffe3] to-slate-50 mb-12"></div>
       <div className="w-full flex flex-col gap-10 px-12">
-        <Text text={"hello frgtsrgdf dfsgdfsgf dsfgdfg dfgfsdgsfdg fgsdfsd fsd dsf hossein khobi"} />
+        <Text
+          text={
+            "hello frgtsrgdf dfsgdfsgf dsfgdfg dfgfsdgsfdg fgsdfsd fsd dsf hossein khobi"
+          }
+        />
         <Text text={"hello hossein khobi"} />
         <Text text={"hello hossein efrsadfsdf khobi"} />
       </div>
+
+      <MessageBox />
     </div>
   );
 }

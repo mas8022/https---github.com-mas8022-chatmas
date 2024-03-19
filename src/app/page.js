@@ -11,15 +11,31 @@ import StoreList from "../../components/templates/storeList";
 import Timeline from "../../components/modules/timeline";
 const emailRegex = /[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}/;
 export default function Home() {
-  const [pageMode, setPageMode] = useState(() => {
-    const localPageMode = JSON.parse(localStorage.getItem("pageMode"));
-    return localPageMode ? localPageMode : false;
-  });
-
-
-  
+  // const [pageMode, setPageMode] = useState(() => {
+  //   const localPageMode = JSON.parse(localStorage.getItem("pageMode"));
+  //   return localPageMode ? localPageMode : false;
+  // });
+  const [pageMode, setPageMode] = useState(false);
   const [flagLog, setFlagLog] = useState(false);
   const [flagModal, setFlagModal] = useState(false);
+
+  useEffect(() => {
+    const unHideModalSignUpHandler = (e) => {
+      if (
+        e.target.contains(
+          document.querySelector(".home_start__momModal__Ft_y3")
+        )
+      ) {
+        setFlagModal(false);
+      }
+    };
+    window.addEventListener("click", (e) => unHideModalSignUpHandler(e));
+    return () => window.removeEventListener("click", unHideModalSignUpHandler);
+  });
+
+  // useEffect(() => {
+  //   localStorage.setItem("pageMode", JSON.stringify(pageMode));
+  // }, [pageMode]);
 
   const changePageModeHandler = async () => {
     if (flagLog) {
@@ -67,7 +83,7 @@ export default function Home() {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(values),
-      }).then(res => console.log(res))
+      }).then((res) => console.log(res));
 
       setFlagModal(false);
       setPageMode(true);
@@ -88,23 +104,6 @@ export default function Home() {
       reader.readAsDataURL(file);
     }
   };
-  useEffect(() => {
-    const unHideModalSignUpHandler = (e) => {
-      if (
-        e.target.contains(
-          document.querySelector(".home_start__momModal__Ft_y3")
-        )
-      ) {
-        setFlagModal(false);
-      }
-    };
-    window.addEventListener("click", (e) => unHideModalSignUpHandler(e));
-    return () => window.removeEventListener("click", unHideModalSignUpHandler);
-  });
-
-  useEffect(() => {
-    localStorage.setItem("pageMode", JSON.stringify(pageMode));
-  }, [pageMode]);
 
   return pageMode ? (
     <>

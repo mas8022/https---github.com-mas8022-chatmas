@@ -5,11 +5,11 @@ const schema = mongoose.Schema({
     type: String,
     require: true,
   },
-  password: { type: String, require: true, maxLength: 15, minLength: 5 },
+  password: { type: String, require: true },
   email: { type: String, require: true },
   profileImage: { type: String },
 });
 
-const model = mongoose.models.Users || mongoose.model("User", schema);
+const model = mongoose.models.User || mongoose.model("User", schema);
 
 export default model;

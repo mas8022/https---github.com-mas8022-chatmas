@@ -1,15 +1,21 @@
 const { default: connectToDb } = require("../../../../configs/db");
 import userModel from "../../../../models/users";
-import { generateToken } from "../../../../utils/auth/sign";
+import { generateToken, hashPassword } from "../../../../utils/auth/sign";
 export async function POST(req) {
   try {
     connectToDb();
     const body = await req.json();
-    const { email } = body;
-
+    const { userName, password, email, profileImage } = body;
     const token = generateToken({ email });
+    const hashedPassword = await hashPassword(password);
 
-    await userModel.create(body);
+
+    await userModel.create({
+      userName,
+      password: hashedPassword,
+      email,
+      profileImage,
+    });
     return Response.json(
       { message: "User Created Successfully :))" },
       {
