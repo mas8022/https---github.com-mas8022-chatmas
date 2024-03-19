@@ -15,7 +15,7 @@ export default function Home() {
   //   const localPageMode = JSON.parse(localStorage.getItem("pageMode"));
   //   return localPageMode ? localPageMode : false;
   // });
-  const [pageMode, setPageMode] = useState(false);
+  const [pageMode, setPageMode] = useState(true);
   const [flagLog, setFlagLog] = useState(false);
   const [flagModal, setFlagModal] = useState(false);
 

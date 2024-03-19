@@ -8,12 +8,12 @@ const schema = mongoose.Schema(
       require: true,
     },
 
-    send: {
+    sender: {
       type: mongoose.Types.ObjectId,
       ref: "User",
       require: true,
     },
-    receiveID: {
+    receiver: {
       type: String,
       require: true,
     },

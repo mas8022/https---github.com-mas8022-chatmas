@@ -11,9 +11,9 @@
     html{
         font-size: 10px;
         scroll-behavior: smooth;
+        font-family: '__Inter_aaf875', '__Inter_Fallback_aaf875';
     }
     ::-webkit-scrollbar{
-
         display: none;
     }
     body{
