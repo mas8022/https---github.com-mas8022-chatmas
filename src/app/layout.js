@@ -4,7 +4,7 @@ import "@fortawesome/fontawesome-svg-core/styles.css";
 import Footer from "../../components/modules/footer";
 import MyContextProvider from "../../utils/contextProvider";
 
-const inter = Inter({ subsets: ["latin"] });
+// const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
   title: "Create Next App",
@@ -15,7 +15,7 @@ export default function RootLayout({ children }) {
   return (
     <MyContextProvider>
       <html lang="en">
-        <body className={inter.className}>
+        <body>
           {children}
           <Footer />
         </body>

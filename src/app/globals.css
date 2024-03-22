@@ -3,6 +3,21 @@
 @tailwind utilities;
 
 @layer base {
+  @font-face {
+    font-family: poppins bold;
+    src: local(poppins bold), url(../../public/fonts/Poppins-Bold.ttf);
+    font-display: swap;
+  }
+  @font-face {
+    font-family: poppins medium;
+    src: local(poppins medium), url(../../public/fonts/Poppins-Medium.ttf);
+    font-display: swap;
+  }
+  @font-face {
+    font-family: poppins light;
+    src: local(poppins light), url(../../public/fonts/Poppins-Light.ttf);
+    font-display: swap;
+  }
   * {
     padding: 0px;
     margin: 0px;
@@ -11,7 +26,7 @@
   html {
     font-size: 10px;
     scroll-behavior: smooth;
-    font-family: "__Inter_aaf875", "__Inter_Fallback_aaf875";
+    font-family: poppins medium;
   }
   ::-webkit-scrollbar {
     display: none;
