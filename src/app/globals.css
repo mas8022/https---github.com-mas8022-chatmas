@@ -2,23 +2,46 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer base{
-    *{
-        padding: 0px;
-        margin: 0px;
-        transition: all linear 0.1s;
+@layer base {
+  * {
+    padding: 0px;
+    margin: 0px;
+    transition: all linear 0.1s;
+  }
+  html {
+    font-size: 10px;
+    scroll-behavior: smooth;
+    font-family: "__Inter_aaf875", "__Inter_Fallback_aaf875";
+  }
+  ::-webkit-scrollbar {
+    display: none;
+  }
+  body {
+    width: 100%;
+    background-image: linear-gradient(to bottom, #fff, #e5ffe3);
+    min-height: 100vh;
+  }
+  .sideItemActive {
+    @apply w-full flex gap-5 items-center bg-gradient-to-bl px-3 py-2 from-[#fff] to-[#e5ffe3] rounded-md;
+  }
+  .sideItemDeActive {
+    @apply w-full flex gap-5 items-center px-3 py-2;
+  }
+  .bgDeActive {
+    display: none;
+  }
+  .bgActive {
+    @apply w-full h-full fixed top-0 left-0 z-[999] bg-black/50;
+  }
+  .sideActive {
+    @apply transition-all duration-500 w-[26rem] h-full flex flex-col gap-5 p-10 bg-white shadow-md fixed top-0 left-0 z-[1000] justify-between pb-[10rem] pl-5;
+  }
+  .sideDeActive {
+    @apply transition-all duration-500 w-[26rem] h-full flex flex-col gap-5 p-10 bg-white shadow-md fixed top-0 left-[-500px] z-[1000] justify-between pb-[10rem] pl-5;
+  }
+  @media only screen and (max-width: 500px) {
+    * {
+      cursor: default;
     }
-    html{
-        font-size: 10px;
-        scroll-behavior: smooth;
-        font-family: '__Inter_aaf875', '__Inter_Fallback_aaf875';
-    }
-    ::-webkit-scrollbar{
-        display: none;
-    }
-    body{
-        width: 100%;
-        background-image: linear-gradient(to bottom, #fff, #e5ffe3);
-        min-height: 100vh;
-    }
+  }
 }

@@ -9,15 +9,17 @@ import Navbar from "../../components/templates/navbar";
 import Search from "../../components/modules/search";
 import StoreList from "../../components/templates/storeList";
 import Timeline from "../../components/modules/timeline";
+import Sidebar from "../../components/templates/sidebar";
 const emailRegex = /[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}/;
 export default function Home() {
   // const [pageMode, setPageMode] = useState(() => {
   //   const localPageMode = JSON.parse(localStorage.getItem("pageMode"));
   //   return localPageMode ? localPageMode : false;
   // });
-  const [pageMode, setPageMode] = useState(false);
+  const [pageMode, setPageMode] = useState(true);
   const [flagLog, setFlagLog] = useState(false);
   const [flagModal, setFlagModal] = useState(false);
+  const [flagSide, setFlagSide] = useState(false);
 
   useEffect(() => {
     const unHideModalSignUpHandler = (e) => {
@@ -29,9 +31,17 @@ export default function Home() {
         setFlagModal(false);
       }
     };
-    window.addEventListener("click", (e) => unHideModalSignUpHandler(e));
+    const closeSideBarHandler = (e) => {
+      if (e.target.contains(document.querySelector(".bgActive"))) {
+        setFlagSide(false);
+      }
+    };
+    window.addEventListener("click", (e) => {
+      unHideModalSignUpHandler(e);
+      closeSideBarHandler(e);
+    });
     return () => window.removeEventListener("click", unHideModalSignUpHandler);
-  });
+  }, []);
 
   // useEffect(() => {
   //   localStorage.setItem("pageMode", JSON.stringify(pageMode));
@@ -108,75 +118,75 @@ export default function Home() {
   return pageMode ? (
     <>
       <div className={style.home}>
-        <Navbar />
+        <Navbar setFlagSide={setFlagSide} />
+        <Sidebar flagSide={flagSide} />
         <Search />
         <StoreList />
         <Timeline />
+        <div className={flagSide ? "bgActive" : "bgDeActive"}></div>
       </div>
     </>
   ) : (
     <>
-      {flagModal && (
-        <div className={style.start__momModal}>
-          <form onSubmit={signUp.handleSubmit} className={style.start__modal}>
-            <p className={style.efwe}>Sign up</p>
-            <input
-              name="userName"
-              value={signUp.values.userName}
-              onChange={signUp.handleChange}
-              type="text"
-              className={style.fsad}
-              placeholder="user name"
-            />
-            {signUp.touched.userName &&
-              signUp.errors.userName &&
-              signUp.errors.userName}
+      <div className={flagModal && style.start__momModal}>
+        <form onSubmit={signUp.handleSubmit} className={style.start__modal}>
+          <p className={style.efwe}>Sign up</p>
+          <input
+            name="userName"
+            value={signUp.values.userName}
+            onChange={signUp.handleChange}
+            type="text"
+            className={style.fsad}
+            placeholder="user name"
+          />
+          {signUp.touched.userName &&
+            signUp.errors.userName &&
+            signUp.errors.userName}
 
-            <input
-              name="email"
-              value={signUp.values.email}
-              onChange={signUp.handleChange}
-              type="text"
-              className={style.fsad}
-              placeholder="email"
-            />
-            {signUp.touched.email && signUp.errors.email && signUp.errors.email}
-            <input
-              name="password"
-              value={signUp.values.password}
-              onChange={signUp.handleChange}
-              type="text"
-              className={style.fsad}
-              placeholder="password"
-            />
-            {signUp.touched.password &&
-              signUp.errors.password &&
-              signUp.errors.password}
+          <input
+            name="email"
+            value={signUp.values.email}
+            onChange={signUp.handleChange}
+            type="text"
+            className={style.fsad}
+            placeholder="email"
+          />
+          {signUp.touched.email && signUp.errors.email && signUp.errors.email}
+          <input
+            name="password"
+            value={signUp.values.password}
+            onChange={signUp.handleChange}
+            type="text"
+            className={style.fsad}
+            placeholder="password"
+          />
+          {signUp.touched.password &&
+            signUp.errors.password &&
+            signUp.errors.password}
 
-            <div className={style.ikenv}>
-              <Button
-                className={style.lkgnsd}
-                component="label"
-                variant="contained"
-                startIcon={<CloudUploadIcon />}
-              >
-                Upload file
-                <VisuallyHiddenInput
-                  type="file"
-                  name="profileImage"
-                  accept="image/*"
-                  onChange={(event) =>
-                    handleImageChange(event, signUp.setFieldValue)
-                  }
-                />
-              </Button>
-              <button className={style.signUpBtn} type="submit">
-                sign up
-              </button>
-            </div>
-          </form>
-        </div>
-      )}
+          <div className={style.ikenv}>
+            <Button
+              className={style.lkgnsd}
+              component="label"
+              variant="contained"
+              startIcon={<CloudUploadIcon />}
+            >
+              Upload file
+              <VisuallyHiddenInput
+                type="file"
+                name="profileImage"
+                accept="image/*"
+                onChange={(event) =>
+                  handleImageChange(event, signUp.setFieldValue)
+                }
+              />
+            </Button>
+            <button className={style.signUpBtn} type="submit">
+              sign up
+            </button>
+          </div>
+        </form>
+      </div>
 
       <div className={style.start}>
         <div className={style.home_home_start__top__OWvhx__FFXGv}>

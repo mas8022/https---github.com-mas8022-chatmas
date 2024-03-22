@@ -3,10 +3,15 @@ import React from "react";
 import style from "../../src/app/styles/navbar.module.css";
 import swal from "sweetalert";
 
-export default function Navbar() {
+export default function Navbar({setFlagSide}) {
   return (
     <div className={style.navbar}>
-      <img className={style.navSvg} src="/images/list.svg" alt="list button" />
+      <img
+        onClick={() => setFlagSide(true)}
+        className={style.navSvg}
+        src="/images/list.svg"
+        alt="list button"
+      />
       <div className={style.sfgf}>Maschat</div>
       <img
         onClick={() =>
