@@ -15,7 +15,10 @@ export default function Footer() {
       <Link href={"/"}>
         <FontAwesomeIcon className={style.footer__icons} icon={faHome} />
       </Link>
+      <Link href={"/explorer"}>
       <FontAwesomeIcon className={style.footer__icons} icon={faShoppingBag} />
+
+      </Link>
       <Link href={"/postUpload"}>
         <div className={style.storeListItem}>
           <FontAwesomeIcon style={{ fontSize: "21px" }} icon={faPlus} />
