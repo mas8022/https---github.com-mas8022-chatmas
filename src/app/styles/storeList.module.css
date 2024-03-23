@@ -1,14 +1,11 @@
 .storeList {
   width: 100%;
-  height: 8rem;
+  height: 6rem;
   display: flex;
   align-items: center;
   gap: 1rem;
-  position: absolute;
-  top: 23rem;
-  padding: 0 3rem;
   overflow-x: scroll;
-
+  margin-bottom: 6rem;
 }
 .storeListItem {
   width: 6rem;
