@@ -1,7 +1,7 @@
 import React from "react";
 import ProfileTopBottoms from "../../../components/templates/profileTopBottoms";
 import Post from "../../../components/modules/post";
-import {data} from "../../../data";
+import { data } from "../../../data";
 import Link from "next/link";
 export default function Profile() {
   return (
@@ -32,12 +32,14 @@ export default function Profile() {
           </span>
         </div>
         <div className="w-[2px] h-[40%] bg-[#e8e8ea]"></div>
-        <div className="h-[100%] flex justify-center flex-col gap-3">
-          <span className="text-[18px] font-bold">412</span>
-          <span className="text-[14px] font-extrabold text-[#606a81]">
-            Followers
-          </span>
-        </div>
+        <Link href={"/followers"}>
+          <div className="h-[100%] flex justify-center flex-col gap-3">
+            <span className="text-[18px] font-bold">412</span>
+            <span className="text-[14px] font-extrabold text-[#606a81]">
+              Followers
+            </span>
+          </div>
+        </Link>
         <div className="w-[2px] h-[40%] bg-[#e8e8ea]"></div>
         <Link href={"/following"}>
           <div className="h-[100%] flex justify-center flex-col gap-3">
