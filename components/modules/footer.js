@@ -16,9 +16,12 @@ export default function Footer() {
         <FontAwesomeIcon className={style.footer__icons} icon={faHome} />
       </Link>
       <FontAwesomeIcon className={style.footer__icons} icon={faShoppingBag} />
-      <div className={style.storeListItem}>
-        <FontAwesomeIcon style={{ fontSize: "21px" }} icon={faPlus} />
-      </div>
+      <Link href={"/upload"}>
+        <div className={style.storeListItem}>
+          <FontAwesomeIcon style={{ fontSize: "21px" }} icon={faPlus} />
+        </div>
+      </Link>
+
       <Link href={"/favorite"}>
         <FontAwesomeIcon className={style.footer__icons} icon={faHeart} />
       </Link>
