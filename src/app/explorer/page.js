@@ -1,5 +1,5 @@
 import React from "react";
-import data from "../../../data";
+import {data} from "../../../data";
 import Post from "../../../components/modules/post";
 export default function Explorer() {
   return (

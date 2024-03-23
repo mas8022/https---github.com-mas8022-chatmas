@@ -1,7 +1,8 @@
 import React from "react";
 import ProfileTopBottoms from "../../../components/templates/profileTopBottoms";
 import Post from "../../../components/modules/post";
-import data from "../../../data";
+import {data} from "../../../data";
+import Link from "next/link";
 export default function Profile() {
   return (
     <div className="w-full p-[3rem] flex flex-col gap-y-5 pb-[10rem]">
@@ -38,16 +39,18 @@ export default function Profile() {
           </span>
         </div>
         <div className="w-[2px] h-[40%] bg-[#e8e8ea]"></div>
-        <div className="h-[100%] flex justify-center flex-col gap-3">
-          <span className="text-[18px] font-bold">310</span>
-          <span className="text-[14px] font-extrabold text-[#606a81]">
-            Following
-          </span>
-        </div>
+        <Link href={"/following"}>
+          <div className="h-[100%] flex justify-center flex-col gap-3">
+            <span className="text-[18px] font-bold">310</span>
+            <span className="text-[14px] font-extrabold text-[#606a81]">
+              Following
+            </span>
+          </div>
+        </Link>
       </div>
 
       <div className="w-full grid grid-cols-3 gap-2 gap-y-5">
-        {data.slice(0,10)?.map((item) => (
+        {data.slice(0, 10)?.map((item) => (
           <Post data={item} />
         ))}
       </div>
