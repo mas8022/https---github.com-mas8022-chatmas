@@ -2,13 +2,15 @@ import React from "react";
 import style from "../../src/app/styles/storeList.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
+import Link from "next/link";
 
 export default function StoreList() {
   return (
     <div className={style.storeList}>
+      <Link href={'/storyUpload'}>
       <div className={style.storeListItem}>
         <FontAwesomeIcon style={{fontSize: "21px"}} icon={faPlus} />
-      </div>
+      </div></Link>
 
       <div
         style={{

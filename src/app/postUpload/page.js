@@ -5,7 +5,7 @@ import { styled } from "@mui/material/styles";
 import Button from "@mui/material/Button";
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 
-export default function Upload() {
+export default function PostUpload() {
   const [cover, setCover] = useState(
     "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOEAAADhCAMAAAAJbSJIAAAAA1BMVEUFUUPtxIMOAAAASElEQVR4nO3BgQAAAADDoPlTX+AIVQEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwDcaiAAFXD1ujAAAAAElFTkSuQmCC"
   );
@@ -81,7 +81,7 @@ export default function Upload() {
           value={formik.values.content}
           type="text"
           className="w-full h-20 rounded-full bg-white/50 border border-black/20 focus:outline-none px-[2rem] text-[1.6rem] font-light"
-          placeholder="Type your content ....."
+          placeholder="Type your post content ....."
         />
       </div>
 
@@ -89,7 +89,7 @@ export default function Upload() {
         className="w-full h-[6rem] rounded-full bg-gradient-to-r from-[#cffa7c] to-[#9ce89d] flex items-center justify-center text-[1.7rem] font-bold"
         type="submit"
       >
-        Post image
+        Send post
       </button>
     </form>
   );
