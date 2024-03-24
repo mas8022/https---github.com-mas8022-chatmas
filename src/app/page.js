@@ -13,11 +13,10 @@ import Sidebar from "../../components/templates/sidebar";
 import Scroller from "../../components/modules/scroller";
 const emailRegex = /[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}/;
 export default function Home() {
-  // const [pageMode, setPageMode] = useState(() => {
-  //   const localPageMode = JSON.parse(localStorage.getItem("pageMode"));
-  //   return localPageMode ? localPageMode : false;
-  // });
-  const [pageMode, setPageMode] = useState(true);
+  const [pageMode, setPageMode] = useState(() => {
+    const localPageMode = JSON.parse(localStorage.getItem("pageMode"));
+    return localPageMode ? localPageMode : false;
+  });
   const [flagLog, setFlagLog] = useState(false);
   const [flagModal, setFlagModal] = useState(false);
   const [flagSide, setFlagSide] = useState(false);
@@ -44,9 +43,9 @@ export default function Home() {
     return () => window.removeEventListener("click", unHideModalSignUpHandler);
   }, []);
 
-  // useEffect(() => {
-  //   localStorage.setItem("pageMode", JSON.stringify(pageMode));
-  // }, [pageMode]);
+  useEffect(() => {
+    localStorage.setItem("pageMode", JSON.stringify(pageMode));
+  }, [pageMode]);
 
   const changePageModeHandler = async () => {
     if (flagLog) {
@@ -75,6 +74,7 @@ export default function Home() {
       password: "",
       email: "",
       profileImage: "",
+      phone: "",
     },
     validate: (values) => {
       const errors = {};
@@ -84,10 +84,13 @@ export default function Home() {
         errors.email = "email not valid";
       } else if (values.password.length > 15 || values.password.length <= 4) {
         errors.password = "password characters should be between 4 and 15";
+      } else if (isNaN(values.phone) || !values.phone.trim()) {
+        errors.password = "type correct phone number";
       }
       return errors;
     },
     onSubmit: (values, { setSubmitting }) => {
+      console.log(values);
       fetch("/api/signup", {
         method: "POST",
         headers: {
@@ -131,7 +134,7 @@ export default function Home() {
           <Timeline />
         </div>
         <div className={flagSide ? "bgActive" : "bgDeActive"}></div>
-        <Scroller/>
+        <Scroller />
       </div>
     </>
   ) : (
@@ -171,6 +174,15 @@ export default function Home() {
           {signUp.touched.password &&
             signUp.errors.password &&
             signUp.errors.password}
+          <input
+            name="phone"
+            value={signUp.values.phone}
+            onChange={signUp.handleChange}
+            type="text"
+            className={style.fsad}
+            placeholder="phone"
+          />
+          {signUp.touched.phone && signUp.errors.phone && signUp.errors.phone}
 
           <div className={style.ikenv}>
             <Button

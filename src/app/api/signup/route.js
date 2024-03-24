@@ -5,16 +5,16 @@ export async function POST(req) {
   try {
     connectToDb();
     const body = await req.json();
-    const { userName, password, email, profileImage } = body;
+    const { userName, password, email, profileImage, phone } = body;
     const token = generateToken({ email });
     const hashedPassword = await hashPassword(password);
-
 
     await userModel.create({
       userName,
       password: hashedPassword,
       email,
       profileImage,
+      phone,
     });
     return Response.json(
       { message: "User Created Successfully :))" },

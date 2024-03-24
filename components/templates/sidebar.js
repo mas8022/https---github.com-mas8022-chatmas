@@ -81,7 +81,7 @@ export default function Sidebar({ flagSide }) {
 
           <span className="font-medium text-[1.7rem]">Stories</span>
         </div>
-        <div className="sideItemDeActive active:sideItemActive">
+        <Link href={'/profiler'}><div className="sideItemDeActive active:sideItemActive">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
@@ -97,8 +97,8 @@ export default function Sidebar({ flagSide }) {
             />
           </svg>
 
-          <span className="font-medium text-[1.7rem]">Profile</span>
-        </div>
+          <span className="font-medium text-[1.7rem]">Profiler</span>
+        </div></Link>
         <div className="sideItemDeActive active:sideItemActive">
           <svg
             xmlns="http://www.w3.org/2000/svg"

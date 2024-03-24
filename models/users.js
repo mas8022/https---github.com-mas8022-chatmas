@@ -8,6 +8,7 @@ const schema = mongoose.Schema({
   password: { type: String, require: true },
   email: { type: String, require: true },
   profileImage: { type: String },
+  phone: { type: Number, require: true },
 });
 
 const model = mongoose.models.User || mongoose.model("User", schema);

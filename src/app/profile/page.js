@@ -9,13 +9,16 @@ export default function Profile() {
       <ProfileTopBottoms />
 
       <div className="h-[10.5rem] w-[100%] flex items-center gap-6">
-        <img
-          style={{
-            background:
-              "url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQzvcxSjwABvomYZsgSIsYinTKxioBwSJKi5ojOY-aRyQ&s')",
-          }}
-          className="w-[8.8rem] h-[8.8rem] rounded-[100%] bg-black relative !bg-cover !bg-no-repeat !bg-center"
-        />
+        <Link href={"/profiler"}>
+          <img
+            style={{
+              background:
+                "url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQzvcxSjwABvomYZsgSIsYinTKxioBwSJKi5ojOY-aRyQ&s')",
+            }}
+            className="w-[8.8rem] h-[8.8rem] rounded-[100%] bg-black relative !bg-cover !bg-no-repeat !bg-center"
+          />
+        </Link>
+
         <div className="h-[100%] flex flex-col justify-center gap-[3px]">
           <p className="text-[1.8rem] font-semibold text-[#000]">Sara Mathew</p>
           <p className="text-[14px] text-[#606a81] font-medium">
