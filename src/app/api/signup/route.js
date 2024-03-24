@@ -30,3 +30,32 @@ export async function POST(req) {
     );
   }
 }
+export async function PUT(req) {
+  try {
+    connectToDb();
+    const body = await req.json();
+    const { userName, password, email, profileImage, phone } = body;
+    const token = generateToken({ email });
+    const hashedPassword = await hashPassword(password);
+
+    await userModel.create({
+      userName,
+      password: hashedPassword,
+      email,
+      profileImage,
+      phone,
+    });
+    return Response.json(
+      { message: "User Update Successfully :))" },
+      {
+        status: 201,
+        headers: { "Set-Cookie": `token=${token};path=/;httpOnly=true;` },
+      }
+    );
+  } catch (error) {
+    return Response.json(
+      { message: "Internal Server Error" },
+      { status: 500, error }
+    );
+  }
+}

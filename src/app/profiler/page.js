@@ -1,5 +1,10 @@
-import { useFormik } from "formik";
+"use client";
 import React from "react";
+import { useFormik } from "formik";
+import { styled } from "@mui/material/styles";
+import Button from "@mui/material/Button";
+import style from "../styles/home.module.css";
+import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 
 export default function Profiler() {
   const VisuallyHiddenInput = styled("input")({
@@ -36,16 +41,13 @@ export default function Profiler() {
       return errors;
     },
     onSubmit: (values, { setSubmitting }) => {
-      fetch("/api/editProfile", {
-        method: "POST",
+      fetch(`/api/sign/${userID}`, {
+        method: "PUT",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(values),
       }).then((res) => console.log(res));
-
-      setFlagModal(false);
-      setPageMode(true);
 
       setTimeout(() => {
         setSubmitting(false);
@@ -66,7 +68,7 @@ export default function Profiler() {
 
   return (
     <div className="w-full h-screen flex flex-col items-center gap-10 p-[3rem]">
-      <div className="flex flex-col items-center gap-3">
+      <div className="flex flex-col items-center gap-3 mb-10">
         <img
           src="/images/beautiful-nature-mountain-scenery-with-flowers-free-photo.jpg"
           alt="profile image"
@@ -74,71 +76,76 @@ export default function Profiler() {
         />
         <span className="font-bold text-[1.8rem]">Masproo225232</span>
       </div>
-      <form onSubmit={signUp.handleSubmit} className="w-full flex flex-col gap-5 items-center">
-          <input
-            name="userName"
-            value={signUp.values.userName}
-            onChange={signUp.handleChange}
-            type="text"
-            className="w-full h-[3rem] rounded-md"
-            placeholder="user name"
-          />
-          {signUp.touched.userName &&
-            signUp.errors.userName &&
-            signUp.errors.userName}
+      <form
+        onSubmit={editProfile.handleSubmit}
+        className="w-[90%] flex flex-col gap-5 items-center"
+      >
+        <input
+          name="userName"
+          value={editProfile.values.userName}
+          onChange={editProfile.handleChange}
+          type="text"
+          className="w-full h-[4rem] rounded-md px-5 text-[1.35rem]  shadow-md focus:outline-0"
+          placeholder="user name"
+        />
+        {editProfile.touched.userName &&
+          editProfile.errors.userName &&
+          editProfile.errors.userName}
 
-          <input
-            name="email"
-            value={signUp.values.email}
-            onChange={signUp.handleChange}
-            type="text"
-            className="w-full h-[3rem] rounded-md"
-            placeholder="email"
-          />
-          {signUp.touched.email && signUp.errors.email && signUp.errors.email}
-          <input
-            name="password"
-            value={signUp.values.password}
-            onChange={signUp.handleChange}
-            type="text"
-            className="w-full h-[3rem] rounded-md"
-            placeholder="password"
-          />
-          {signUp.touched.password &&
-            signUp.errors.password &&
-            signUp.errors.password}
-          <input
-            name="phone"
-            value={signUp.values.phone}
-            onChange={signUp.handleChange}
-            type="text"
-            className="w-full h-[3rem] rounded-md"
-            placeholder="phone"
-          />
-          {signUp.touched.phone && signUp.errors.phone && signUp.errors.phone}
+        <input
+          name="email"
+          value={editProfile.values.email}
+          onChange={editProfile.handleChange}
+          type="text"
+          className="w-full h-[4rem] rounded-md px-5 text-[1.35rem]  shadow-md focus:outline-0"
+          placeholder="email"
+        />
+        {editProfile.touched.email &&
+          editProfile.errors.email &&
+          editProfile.errors.email}
+        <input
+          name="password"
+          value={editProfile.values.password}
+          onChange={editProfile.handleChange}
+          type="text"
+          className="w-full h-[4rem] rounded-md px-5 text-[1.35rem]  shadow-md focus:outline-0"
+          placeholder="password"
+        />
+        {editProfile.touched.password &&
+          editProfile.errors.password &&
+          editProfile.errors.password}
+        <input
+          name="phone"
+          value={editProfile.values.phone}
+          onChange={editProfile.handleChange}
+          type="text"
+          className="w-full h-[4rem] rounded-md px-5 text-[1.35rem]  shadow-md focus:outline-0"
+          placeholder="phone"
+        />
+        {editProfile.touched.phone &&
+          editProfile.errors.phone &&
+          editProfile.errors.phone}
 
-          <div className={style.ikenv}>
-            <Button
-              className={style.lkgnsd}
-              component="label"
-              variant="contained"
-              startIcon={<CloudUploadIcon />}
-            >
-              Upload file
-              <VisuallyHiddenInput
-                type="file"
-                name="profileImage"
-                accept="image/*"
-                onChange={(event) =>
-                  handleImageChange(event, signUp.setFieldValue)
-                }
-              />
-            </Button>
-            <button className={style.signUpBtn} type="submit">
-              sign up
-            </button>
-          </div>
-        </form>
+        <Button
+          className="w-full h-4rem bg-white shadow-md text-[1.5rem] text-[black]"
+          component="label"
+          variant="contained"
+          startIcon={<CloudUploadIcon />}
+        >
+          Upload file
+          <VisuallyHiddenInput
+            type="file"
+            name="profileImage"
+            accept="image/*"
+            onChange={(event) =>
+              handleImageChange(event, editProfile.setFieldValue)
+            }
+          />
+        </Button>
+        <button className="w-full h-[5rem] bg-gradient-to-r shadow-md from-[#cffa7c] to-[#9ce89d] text-[1.7rem] text-[black]" type="submit">
+          Edit profile
+        </button>
+      </form>
     </div>
   );
 }
