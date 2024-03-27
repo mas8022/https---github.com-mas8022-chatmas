@@ -2,11 +2,11 @@ import connectToDb from "../../../../../configs/db";
 import { generateToken } from "../../../../../utils/auth/sign";
 import userModel from "../../../../../models/users";
 
-export async function PUT(req) {
+export async function PUT(req, {params}) {
   try {
     connectToDb();
-    const { id } = req.params;
-   console.log(id);
+    const { id } = params;
+
     const body = await req.json();
     const { userName, email, profileImage, phone } = body;
     const token = generateToken({ email });

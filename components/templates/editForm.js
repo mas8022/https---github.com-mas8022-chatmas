@@ -1,12 +1,15 @@
 "use client";
+import React from "react";
 import styled from "@emotion/styled";
 import { Button } from "@mui/material";
 import { useFormik } from "formik";
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
-import React from "react";
+import swal from "sweetalert";
+import { useRouter } from "next/navigation";
+
 const emailRegex = /[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}/;
 export default function EditForm({ user }) {
-
+  let router = useRouter()
   const VisuallyHiddenInput = styled("input")({
     clip: "rect(0 0 0 0)",
     clipPath: "inset(50%)",
@@ -39,13 +42,23 @@ export default function EditForm({ user }) {
       return errors;
     },
     onSubmit: (values, { setSubmitting }) => {
-      fetch(`/api/editProfile/${user._id}`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(values),
-      }).then((res) => console.log(res));
+      swal({
+        icon: "warning",
+        text: "Are you sure of changing",
+      }).then((result) => {
+        if (result) {
+          fetch(`/api/editProfile/${user._id}`, {
+            method: "PUT",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(values),
+          });
+          router.refresh()
+          router.refresh()
+          
+        }
+      });
 
       setTimeout(() => {
         setSubmitting(false);

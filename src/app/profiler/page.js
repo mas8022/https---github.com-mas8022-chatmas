@@ -16,7 +16,7 @@ export default async function Profiler() {
     <div className="w-full h-screen flex flex-col items-center justify-between p-[3rem] pb-[17rem]">
       <div className="flex flex-col items-center gap-3 mb-10">
         <img
-          src="/images/beautiful-nature-mountain-scenery-with-flowers-free-photo.jpg"
+          src={user.profileImage?user.profileImage:"/images/images.jpg"}
           alt="profile image"
           className="w-[20rem] h-[20rem] rounded-full bg-cover bg-center bg-no-repeat"
         />

@@ -13,7 +13,7 @@ export default async function Profile() {
 
   const tokenPayLoad = verifyToken(token);
   connectToDb()
-  const me = await usermodel.findOne({ email: tokenPayLoad.email });
+  const user = await usermodel.findOne({ email: tokenPayLoad.email });
 
   return (
     <div className="w-full p-[3rem] flex flex-col gap-y-5 pb-[10rem]">
@@ -22,13 +22,13 @@ export default async function Profile() {
       <div className="h-[10.5rem] w-[100%] flex items-center gap-6">
         <Link href={"/profiler"}>
           <img
-            src={me.profileImage ? me.profileImage : "/images/images.jpg"}
+            src={user?.profileImage ? user.profileImage : "/images/images.jpg"}
             className="w-[8.8rem] h-[8.8rem] rounded-[100%] bg-black relative !bg-cover !bg-no-repeat !bg-center"
           />
         </Link>
 
         <div className="h-[100%] flex flex-col justify-center gap-[3px]">
-          <p className="text-[1.8rem] font-semibold text-[#000]">{me?.userName}</p>
+          <p className="text-[1.8rem] font-semibold text-[#000]">{user?.userName}</p>
           <p className="text-[14px] text-[#606a81] font-medium">
             Tehran, Iran
           </p>
