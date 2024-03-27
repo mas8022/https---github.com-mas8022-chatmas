@@ -1,9 +1,10 @@
+import Link from "next/link";
 import React from "react";
 
 export default function Comment() {
   return (
     <div className="w-full bg-white/50 shadow-lg flex flex-col gap-10 p-7">
-      <div className="w-full flex gap-6 items-center">
+      <Link className="w-full flex gap-6 items-center" href={`/contact/${"54rew"}`}>
         <img
           src="/images/good-nature-homepage-hero_2-1280x640.jpg"
           alt="user image"
@@ -12,7 +13,7 @@ export default function Comment() {
         <div className="text-[1.4rem] w-full h-[4rem] flex items-center justify-center border border-white/0 border-b-slate-800">
           Mohammad amin saidi rad
         </div>
-      </div>
+      </Link>
 
       <p className="text-[1.5rem]">
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Quis, nihil
