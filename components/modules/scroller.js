@@ -2,6 +2,11 @@
 import React from "react";
 
 export default function Scroller() {
+
+  window.addEventListener("scroll", (e) => {
+    
+  })
+
   return (
     <div
     onClick={() => scrollTo(0, 0)}
