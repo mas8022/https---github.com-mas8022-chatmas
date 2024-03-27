@@ -1,11 +1,12 @@
 "use client";
+import { useRouter } from "next/navigation";
 import React from "react";
 export default function ProfileTopBottoms() {
- 
+ let router = useRouter()
 
   return (
     <div className="w-[100%] h-[4rem] flex items-center justify-between">
-      <img onClick={() => location.pathname = '/'} src="/images/arrow-left.svg" alt="back" />
+      <img onClick={() => router.back()} src="/images/arrow-left.svg" alt="back" />
       <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
