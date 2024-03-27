@@ -5,7 +5,7 @@ export default function ShowPost() {
   return (
     <div className="w-full flex flex-col gap-10 p-12 pb-[12rem]">
       <img
-        className="w-full h-[30rem]"
+        className="w-full h-[30rem] shadow-md"
         src="/images/beautiful-nature-mountain-scenery-with-flowers-free-photo.jpg"
         alt="post image"
       />
