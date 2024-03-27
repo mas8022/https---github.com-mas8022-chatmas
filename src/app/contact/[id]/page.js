@@ -2,7 +2,6 @@
 import React, { useEffect } from "react";
 import Timeline from "../../../../components/modules/timeline";
 import ProfileTopBottoms from "../../../../components/templates/profileTopBottoms";
-import Scroller from "../../../../components/modules/scroller";
 import Link from "next/link";
 
 export default function Profile({params}) {

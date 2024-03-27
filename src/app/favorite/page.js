@@ -1,7 +1,6 @@
 import React from "react";
 import Search from "../../../components/modules/search";
 import Timeline from "../../../components/modules/timeline";
-import Scroller from "../../../components/modules/scroller";
 
 export default function Favorite() {
   return (
@@ -13,7 +12,6 @@ export default function Favorite() {
           <Timeline />
           <Timeline />
         </div>
-        <Scroller/>
       </div>
     </div>
   );

@@ -3,8 +3,7 @@ import "./globals.css";
 import "@fortawesome/fontawesome-svg-core/styles.css";
 import Footer from "../../components/modules/footer";
 import MyContextProvider from "../../utils/contextProvider";
-
-// const inter = Inter({ subsets: ["latin"] });
+import Scroller from "../../components/modules/scroller";
 
 export const metadata = {
   title: "Create Next App",
@@ -18,6 +17,7 @@ export default function RootLayout({ children }) {
         <body>
           {children}
           <Footer />
+          <Scroller/>
         </body>
       </html>
     </MyContextProvider>

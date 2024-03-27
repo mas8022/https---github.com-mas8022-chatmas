@@ -10,7 +10,6 @@ import Search from "../../components/modules/search";
 import StoreList from "../../components/templates/storeList";
 import Timeline from "../../components/modules/timeline";
 import Sidebar from "../../components/templates/sidebar";
-import Scroller from "../../components/modules/scroller";
 const emailRegex = /[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}/;
 export default function Home() {
   const [pageMode, setPageMode] = useState(() => {
@@ -134,7 +133,6 @@ export default function Home() {
           <Timeline />
         </div>
         <div className={flagSide ? "bgActive" : "bgDeActive"}></div>
-        <Scroller />
       </div>
     </>
   ) : (

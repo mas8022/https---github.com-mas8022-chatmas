@@ -1,6 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import { following } from "../../../data";
+import ContactBox from "../../../components/modules/contactBox";
 export default function Followers() {
   const [search, setSearch] = useState("");
   const [users, setUsers] = useState([...following]);
@@ -16,9 +17,6 @@ export default function Followers() {
     setUsers(filterUser);
   };
 
-  const selectHandler = (ID) => {
-    console.log(ID);
-  }
  
   return (
     <div className="w-full p-[3rem] pb-[10rem]">
@@ -39,21 +37,7 @@ export default function Followers() {
 
       <div className="w-full flex flex-col gap-5">
         {users?.map((user, index) => (
-          <div
-          onClick={() => selectHandler(index)}
-            key={index}
-            className="w-full h-[5rem] rounded-md px-5 flex items-center shadow-md justify-between"
-          >
-            <div className="flex gap-5 items-center">
-              <img
-                src={user.image}
-                alt="user image"
-                className="w-[3.7rem] h-[3.7rem] bg-center bg-cover rounded-full shrink-0 shadow-md "
-              />
-              <span>{user.userName}</span>
-            </div>
-            <span>{user.online? 'online': "offline"}</span>
-          </div>
+       <ContactBox {...user} key={index}/>
         ))}
       </div>
     </div>
