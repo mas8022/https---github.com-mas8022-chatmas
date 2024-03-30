@@ -1,7 +1,7 @@
 "use client"
 import React, { useEffect } from "react";
 import Timeline from "../../../../components/modules/timeline";
-import ProfileTopBottoms from "../../../../components/templates/profileTopBottoms";
+import ProfileTopBottoms from "../../../../components/modules/profileTopBottoms";
 import Link from "next/link";
 
 export default function Profile({params}) {

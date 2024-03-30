@@ -4,6 +4,7 @@ import { useFormik } from "formik";
 import { styled } from "@mui/material/styles";
 import Button from "@mui/material/Button";
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
+import Navbar from "../../../components/templates/navbar";
 
 export default function PostUpload() {
   const [cover, setCover] = useState(
@@ -58,6 +59,7 @@ export default function PostUpload() {
       onSubmit={formik.handleSubmit}
       className="w-full h-screen flex flex-col gap-7 p-[3rem] pb-[12rem] items-center justify-between"
     >
+    <Navbar/>
       <div className="w-full flex flex-col items-center gap-10">
         <Button
           className="w-full bg-cover h-[30rem] bg-slate-900/50 flex items-center justify-center font-light text-zinc-100 text-[2rem]"

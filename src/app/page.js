@@ -9,7 +9,6 @@ import Navbar from "../../components/templates/navbar";
 import Search from "../../components/modules/search";
 import StoreList from "../../components/templates/storeList";
 import Timeline from "../../components/modules/timeline";
-import Sidebar from "../../components/templates/sidebar";
 const emailRegex = /[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}/;
 export default function Home() {
   const [pageMode, setPageMode] = useState(() => {
@@ -18,7 +17,6 @@ export default function Home() {
   });
   const [flagLog, setFlagLog] = useState(false);
   const [flagModal, setFlagModal] = useState(false);
-  const [flagSide, setFlagSide] = useState(false);
 
   useEffect(() => {
     const unHideModalSignUpHandler = (e) => {
@@ -30,15 +28,9 @@ export default function Home() {
         setFlagModal(false);
       }
     };
-    const closeSideBarHandler = (e) => {
-      if (e.target.contains(document.querySelector(".bgActive"))) {
-        setFlagSide(false);
-      }
-    };
-    window.addEventListener("click", (e) => {
-      unHideModalSignUpHandler(e);
-      closeSideBarHandler(e);
-    });
+
+    window.addEventListener("click", (e) => unHideModalSignUpHandler(e));
+    
     return () => window.removeEventListener("click", unHideModalSignUpHandler);
   }, []);
 
@@ -121,8 +113,7 @@ export default function Home() {
   return pageMode ? (
     <>
       <div className={style.home}>
-        <Navbar setFlagSide={setFlagSide} />
-        <Sidebar flagSide={flagSide} />
+        <Navbar />
         <Search />
         <StoreList />
         <div className="w-full flex flex-col gap-8 pb-[12rem]">
@@ -132,7 +123,7 @@ export default function Home() {
           <Timeline />
           <Timeline />
         </div>
-        <div className={flagSide ? "bgActive" : "bgDeActive"}></div>
+        
       </div>
     </>
   ) : (

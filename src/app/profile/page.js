@@ -1,5 +1,5 @@
 import React from "react";
-import ProfileTopBottoms from "../../../components/templates/profileTopBottoms";
+import ProfileTopBottoms from "../../../components/modules/profileTopBottoms";
 import Post from "../../../components/modules/post";
 import { data } from "../../../data";
 import Link from "next/link";
