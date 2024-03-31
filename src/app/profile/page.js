@@ -12,7 +12,7 @@ export default async function Profile() {
   const token = cookies().get("token")?.value;
 
   const tokenPayLoad = verifyToken(token);
-  connectToDb()
+  connectToDb();
   const user = await usermodel.findOne({ email: tokenPayLoad.email });
 
   return (
@@ -28,21 +28,25 @@ export default async function Profile() {
         </Link>
 
         <div className="h-[100%] flex flex-col justify-center gap-[3px]">
-          <p className="text-[1.8rem] font-semibold text-[#000]">{user?.userName}</p>
-          <p className="text-[14px] text-[#606a81] font-medium">
-            Tehran, Iran
+          <p className="text-[1.8rem] font-semibold text-[#000]">
+            {user?.userName}
           </p>
+          <p className="text-[14px] text-[#606a81] font-medium">Tehran, Iran</p>
         </div>
       </div>
 
       <div className="w-[100%] h-[8rem] flex items-center justify-evenly">
-        <div className="h-[100%] flex justify-center flex-col gap-1">
-          <span className="text-[18px] font-bold">1051</span>
-          <span className="text-[14px] font-extrabold text-[#606a81]">
-            Posts
-          </span>
-        </div>
+        <Link href={"/followers"}>
+          <div className="h-[100%] flex justify-center flex-col gap-1">
+            <span className="text-[18px] font-bold">1051</span>
+            <span className="text-[14px] font-extrabold text-[#606a81]">
+              Posts
+            </span>
+          </div>
+        </Link>
+
         <div className="w-[2px] h-[40%] bg-[#e8e8ea]"></div>
+
         <Link href={"/followers"}>
           <div className="h-[100%] flex justify-center flex-col gap-3">
             <span className="text-[18px] font-bold">412</span>
@@ -51,7 +55,9 @@ export default async function Profile() {
             </span>
           </div>
         </Link>
+
         <div className="w-[2px] h-[40%] bg-[#e8e8ea]"></div>
+
         <Link href={"/following"}>
           <div className="h-[100%] flex justify-center flex-col gap-3">
             <span className="text-[18px] font-bold">310</span>

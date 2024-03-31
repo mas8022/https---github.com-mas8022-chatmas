@@ -166,8 +166,10 @@ export default function Navbar() {
             </div>
           </Link>
         </div>
-        <div className="w-full h-[5rem] flex items-center justify-between  border-t-2 pl-5">
-          <svg
+        <div className="w-full h-[7rem] flex items-center justify-between pt-[1rem] border-t-2 pl-5">
+          <h1 className="font-bold text-[1.5rem]">MasChat</h1>
+          <img className="w-[4rem] h-[4rem]" src="/images/logo.png" alt="logo" />
+          {/* <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
             viewBox="0 0 24 24"
@@ -200,7 +202,7 @@ export default function Navbar() {
               strokeLinejoin="round"
               d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
             />
-          </svg>
+          </svg> */}
         </div>
       </div>
 

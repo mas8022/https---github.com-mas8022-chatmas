@@ -25,7 +25,7 @@ export default function Footer() {
         </div>
       </Link>
 
-      <Link href={"/favorite"}>
+      <Link href={"/favorites"}>
         <FontAwesomeIcon className={style.footer__icons} icon={faHeart} />
       </Link>
       <Link href={"/profile"}>
