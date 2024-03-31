@@ -180,7 +180,7 @@ export default function Home() {
               variant="contained"
               startIcon={<CloudUploadIcon />}
             >
-              Upload file
+              Upload Photo
               <VisuallyHiddenInput
                 type="file"
                 name="profileImage"
@@ -218,9 +218,11 @@ export default function Home() {
           <div onClick={changePageModeHandler} className={style.Rectangle}>
             Get Started
           </div>
+
           <span className={style.sdifuhds}>
             Dont have an account?
-            <span className="text-style-1">Sign up</span>
+
+            <span onClick={() => setFlagModal(true)} className="text-style-1">Sign up</span>
           </span>
         </div>
       </div>

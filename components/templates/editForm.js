@@ -6,10 +6,11 @@ import { useFormik } from "formik";
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import swal from "sweetalert";
 import { useRouter } from "next/navigation";
-
 const emailRegex = /[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}/;
+
 export default function EditForm({ user }) {
   let router = useRouter()
+
   const VisuallyHiddenInput = styled("input")({
     clip: "rect(0 0 0 0)",
     clipPath: "inset(50%)",
@@ -21,6 +22,7 @@ export default function EditForm({ user }) {
     whiteSpace: "nowrap",
     width: 1,
   });
+
   const { userName, email, profileImage, phone } = user;
 
   const editProfile = useFormik({
@@ -76,6 +78,7 @@ export default function EditForm({ user }) {
       reader.readAsDataURL(file);
     }
   };
+
   return (
     <form
       onSubmit={editProfile.handleSubmit}
@@ -117,12 +120,12 @@ export default function EditForm({ user }) {
         editProfile.errors.phone}
 
       <Button
-        className="w-full h-4rem bg-white shadow-md text-[1.5rem] text-[black]"
+        className="w-full h-[4rem] bg-white shadow-md text-[1.5rem] text-[black]"
         component="label"
         variant="contained"
         startIcon={<CloudUploadIcon />}
       >
-        Upload file
+        Upload Photo
         <VisuallyHiddenInput
           type="file"
           name="profileImage"
