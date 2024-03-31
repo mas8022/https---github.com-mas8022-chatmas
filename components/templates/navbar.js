@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import style from "../../src/app/styles/navbar.module.css";
 import swal from "sweetalert";
 import Link from "next/link";
+import Bg from "../modules/bg";
 
 export default function Navbar() {
 
@@ -206,7 +207,7 @@ export default function Navbar() {
         </div>
       </div>
 
-      <div className={flagSide ? "bgActive" : "bgDeActive"}></div>
+      <Bg active={flagSide}></Bg>
     </>
   );
 }

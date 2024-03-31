@@ -1,6 +1,7 @@
 .timeline {
   width: 100%;
   height: auto;
+  position: relative;
 }
 
 .timeline__bottom {
@@ -27,6 +28,7 @@
   width: 2.4rem;
   height: 2.4rem;
 }
+
 .timeline__top__right {
   display: flex;
   align-items: center;
