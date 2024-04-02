@@ -1,15 +1,18 @@
-"use client"
-import React, { useEffect } from "react";
+"use client";
+import React, { useEffect, useState } from "react";
 import Timeline from "../../../../components/modules/timeline";
 import ProfileTopBottoms from "../../../../components/modules/profileTopBottoms";
 import Link from "next/link";
+import { stringify } from "postcss";
 
-export default function Profile({params}) {
+export default function Profile({ params }) {
+  const [user, setUser] = useState({});
 
-    // useEffect(() => {
-    //     console.log(params.id);
-
-    // },[])
+  useEffect(() => {
+    fetch(`/api/users/${params.id}`)
+      .then((res) => res.json())
+      .then((data) => setUser(data));
+  }, []);
 
   return (
     <div className="w-full p-[3rem] flex flex-col gap-y-5 pb-[10rem]">
@@ -17,17 +20,19 @@ export default function Profile({params}) {
 
       <div className="h-[10.5rem] w-[100%] flex items-center gap-6">
         <img
-          style={{
-            background:
-              "url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQzvcxSjwABvomYZsgSIsYinTKxioBwSJKi5ojOY-aRyQ&s')",
-          }}
-          className="w-[8.8rem] h-[8.8rem] rounded-[100%] bg-black relative !bg-cover !bg-no-repeat !bg-center"
+          src={
+            user.userName
+              ? user.profileImage
+              : "/images/images.jpg"
+          }
+          alt="user image"
+          className="w-[8.8rem] h-[8.8rem] rounded-[100%] relative"
         />
         <div className="h-[100%] flex flex-col justify-center gap-[3px]">
-          <p className="text-[1.8rem] font-semibold text-[#000]">Sara Mathew</p>
-          <p className="text-[14px] text-[#606a81] font-medium">
-            Bangalore, India
+          <p className="text-[1.8rem] font-semibold text-[#000]">
+            {user.userName}
           </p>
+          <p className="text-[14px] text-[#606a81] font-medium">Tehran, Iran</p>
         </div>
       </div>
 
