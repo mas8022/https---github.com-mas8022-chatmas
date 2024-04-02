@@ -1,15 +1,16 @@
 "use client";
-import { useEffect, useState } from "react";
-import style from "../app/styles/home.module.css";
+import React, { useEffect, useState } from "react";
 import { useFormik } from "formik";
 import { styled } from "@mui/material/styles";
 import Button from "@mui/material/Button";
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
+const emailRegex = /[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}/;
+import style from "../app/styles/home.module.css";
 import Navbar from "../../components/templates/navbar";
 import Search from "../../components/modules/search";
 import StoreList from "../../components/templates/storeList";
 import Timeline from "../../components/modules/timeline";
-const emailRegex = /[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}/;
+
 export default function Home() {
   const [pageMode, setPageMode] = useState(() => {
     const localPageMode = JSON.parse(localStorage.getItem("pageMode"));
@@ -30,7 +31,7 @@ export default function Home() {
     };
 
     window.addEventListener("click", (e) => unHideModalSignUpHandler(e));
-    
+
     return () => window.removeEventListener("click", unHideModalSignUpHandler);
   }, []);
 
@@ -50,8 +51,6 @@ export default function Home() {
   const VisuallyHiddenInput = styled("input")({
     clip: "rect(0 0 0 0)",
     clipPath: "inset(50%)",
-    // height: 1,
-    // overflow: "hidden",
     position: "absolute",
     bottom: 0,
     left: 0,
@@ -111,21 +110,18 @@ export default function Home() {
   };
 
   return pageMode ? (
-    <>
-      <div className={style.home}>
-        <Navbar />
-        <Search />
-        <StoreList />
-        <div className="w-full flex flex-col gap-8 pb-[12rem]">
-          <Timeline />
-          <Timeline />
-          <Timeline />
-          <Timeline />
-          <Timeline />
-        </div>
-        
+    <div className={style.home}>
+      <Navbar />
+      <Search />
+      <StoreList />
+      <div className="w-full flex flex-col gap-8 pb-[12rem]">
+        <Timeline />
+        <Timeline />
+        <Timeline />
+        <Timeline />
+        <Timeline />
       </div>
-    </>
+    </div>
   ) : (
     <>
       <div className={flagModal && style.start__momModal}>
@@ -196,7 +192,6 @@ export default function Home() {
           </div>
         </form>
       </div>
-
       <div className={style.start}>
         <div className={style.home_home_start__top__OWvhx__FFXGv}>
           <div
@@ -221,8 +216,9 @@ export default function Home() {
 
           <span className={style.sdifuhds}>
             Dont have an account?
-
-            <span onClick={() => setFlagModal(true)} className="text-style-1">Sign up</span>
+            <span onClick={() => setFlagModal(true)} className="text-style-1">
+              Sign up
+            </span>
           </span>
         </div>
       </div>

@@ -36,7 +36,7 @@ export default async function Profile() {
       </div>
 
       <div className="w-[100%] h-[8rem] flex items-center justify-evenly">
-        <Link href={"/followers"}>
+        <Link href={"/posts"}>
           <div className="h-[100%] flex justify-center flex-col gap-1">
             <span className="text-[18px] font-bold">1051</span>
             <span className="text-[14px] font-extrabold text-[#606a81]">
