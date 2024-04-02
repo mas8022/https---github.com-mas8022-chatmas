@@ -18,7 +18,7 @@ export default function Profile({ params }) {
     <div className="w-full p-[3rem] flex flex-col gap-y-5 pb-[10rem]">
       <ProfileTopBottoms />
 
-      <div className="h-[10.5rem] w-[100%] flex items-center gap-6">
+      <Link href={`/profiler/${params.id}`} className="h-[10.5rem] w-[100%] flex items-center gap-6">
         <img
           src={
             user.userName
@@ -28,13 +28,14 @@ export default function Profile({ params }) {
           alt="user image"
           className="w-[8.8rem] h-[8.8rem] rounded-[100%] relative"
         />
+
         <div className="h-[100%] flex flex-col justify-center gap-[3px]">
           <p className="text-[1.8rem] font-semibold text-[#000]">
             {user.userName}
           </p>
           <p className="text-[14px] text-[#606a81] font-medium">Tehran, Iran</p>
         </div>
-      </div>
+      </Link>
 
       <div className="w-[100%] h-[8rem] flex items-center justify-evenly">
         <div className="h-[100%] flex justify-center flex-col gap-1">

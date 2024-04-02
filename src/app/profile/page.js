@@ -20,7 +20,7 @@ export default async function Profile() {
       <ProfileTopBottoms />
 
       <div className="h-[10.5rem] w-[100%] flex items-center gap-6">
-        <Link href={"/profiler"}>
+        <Link href={`/profiler/${user._id}`}>
           <img
             src={user?.profileImage ? user.profileImage : "/images/images.jpg"}
             className="w-[8.8rem] h-[8.8rem] rounded-[100%] bg-black relative !bg-cover !bg-no-repeat !bg-center"
