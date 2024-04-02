@@ -58,6 +58,7 @@ export default function EditForm({ user }) {
           });
           router.refresh()
           router.refresh()
+          router.refresh()
           
         }
       });
