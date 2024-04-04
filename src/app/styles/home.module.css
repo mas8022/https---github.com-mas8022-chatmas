@@ -127,6 +127,19 @@
   color: #000;
   background: #cffa7c;
 }
+.signUpBtnf {
+  border: 0px;
+  border-radius: 20px;
+  height: 100%;
+  width: 12rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  color: #000;
+  background: #cffa7c;
+  margin: 0 auto;
+}
 .signUpBtn:active {
   scale: 99%;
 }

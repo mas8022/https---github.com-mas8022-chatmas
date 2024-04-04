@@ -10,12 +10,11 @@ import context from "../../utils/context";
 import { useRouter } from "next/navigation";
 export default function Welcome({ Active }) {
   const contextWelcome = useContext(context);
-  const router = useRouter()
+  const router = useRouter();
   const [flagLog, setFlagLog] = useState(false);
   const [flagModal, setFlagModal] = useState(false);
+  const [flagLoginModal, setFlagLoginModal] = useState(false);
 
-  // const user = Me();
-  // console.log(user);
 
   useEffect(() => {
     const unHideModalSignUpHandler = (e) => {
@@ -25,6 +24,7 @@ export default function Welcome({ Active }) {
         )
       ) {
         setFlagModal(false);
+        setFlagLoginModal(false);
       }
     };
 
@@ -69,7 +69,7 @@ export default function Welcome({ Active }) {
       } else if (values.password.length > 15 || values.password.length <= 4) {
         errors.password = "password characters should be between 4 and 15";
       } else if (isNaN(values.phone) || !values.phone.trim()) {
-        errors.password = "type correct phone number";
+        errors.phone = "type correct phone number";
       }
       return errors;
     },
@@ -83,7 +83,44 @@ export default function Welcome({ Active }) {
       }).then((res) => {
         if (res.ok) {
           window.scrollTo(0, 0);
-          router.refresh()
+          router.refresh();
+        }
+      });
+
+      setFlagModal(false);
+      contextWelcome.setPageMode(true);
+
+      setTimeout(() => {
+        setSubmitting(false);
+      }, 3000);
+    },
+  });
+
+  const login = useFormik({
+    initialValues: {
+      password: "",
+      email: "",
+    },
+    validate: (values) => {
+      const errors = {};
+      if (!emailRegex.test(values.email)) {
+        errors.email = "email not valid";
+      } else if (values.password.length > 15 || values.password.length <= 4) {
+        errors.password = "password characters should be between 4 and 15";
+      }
+      return errors;
+    },
+    onSubmit: (values, { setSubmitting }) => {
+      fetch("/api/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(values),
+      }).then((res) => {
+        if (res.ok) {
+          window.scrollTo(0, 0);
+          router.refresh();
         }
       });
 
@@ -108,80 +145,122 @@ export default function Welcome({ Active }) {
   };
 
   return (
-    <div className={contextWelcome.pageMode && Active ? "welcomeDeActive" : undefined}>
-      <div className={flagModal ? style.start__momModal: undefined}>
-        <form onSubmit={signUp.handleSubmit} className={style.start__modal}>
-          <p className={style.efwe}>Sign up</p>
-          <input
-            name="userName"
-            value={signUp.values.userName}
-            onChange={signUp.handleChange}
-            type="text"
-            className={style.fsad}
-            placeholder="user name"
-          />
-          {signUp.touched.userName &&
-            signUp.errors.userName &&
-            signUp.errors.userName}
+    <div
+      className={
+        contextWelcome.pageMode && Active ? "welcomeDeActive" : undefined
+      }
+    >
+      <div
+        className={
+          flagModal || flagLoginModal ? style.start__momModal : undefined
+        }
+      >
+        {flagModal && !flagLoginModal ? (
+          <form onSubmit={signUp.handleSubmit} className={style.start__modal}>
+            <p className={style.efwe}>Sign up</p>
+            <input
+              name="userName"
+              value={signUp.values.userName}
+              onChange={signUp.handleChange}
+              type="text"
+              className={style.fsad}
+              placeholder="user name"
+            />
+            {signUp.touched.userName &&
+              signUp.errors.userName &&
+              signUp.errors.userName}
 
-          <input
-            name="email"
-            value={signUp.values.email}
-            onChange={signUp.handleChange}
-            type="text"
-            className={style.fsad}
-            placeholder="email"
-          />
-          {signUp.touched.email && signUp.errors.email && signUp.errors.email}
-          <input
-            name="password"
-            value={signUp.values.password}
-            onChange={signUp.handleChange}
-            type="text"
-            className={style.fsad}
-            placeholder="password"
-          />
-          {signUp.touched.password &&
-            signUp.errors.password &&
-            signUp.errors.password}
-          <input
-            name="phone"
-            value={signUp.values.phone}
-            onChange={signUp.handleChange}
-            type="text"
-            className={style.fsad}
-            placeholder="phone"
-          />
-          {signUp.touched.phone && signUp.errors.phone && signUp.errors.phone}
+            <input
+              name="email"
+              value={signUp.values.email}
+              onChange={signUp.handleChange}
+              type="text"
+              className={style.fsad}
+              placeholder="email"
+            />
+            {signUp.touched.email && signUp.errors.email && signUp.errors.email}
+            <input
+              name="password"
+              value={signUp.values.password}
+              onChange={signUp.handleChange}
+              type="text"
+              className={style.fsad}
+              placeholder="password"
+            />
+            {signUp.touched.password &&
+              signUp.errors.password &&
+              signUp.errors.password}
+            <input
+              name="phone"
+              value={signUp.values.phone}
+              onChange={signUp.handleChange}
+              type="text"
+              className={style.fsad}
+              placeholder="phone"
+            />
+            {signUp.touched.phone && signUp.errors.phone && signUp.errors.phone}
 
-          <div className={style.ikenv}>
-            <Button
-              className={style.lkgnsd}
-              component="label"
-              variant="contained"
-              startIcon={<CloudUploadIcon />}
-            >
-              Upload Photo
-              <VisuallyHiddenInput
-                type="file"
-                name="profileImage"
-                accept="image/*"
-                onChange={(event) =>
-                  handleImageChange(event, signUp.setFieldValue)
-                }
-              />
-            </Button>
-            <button className={style.signUpBtn} type="submit">
-              sign up
-            </button>
-          </div>
-        </form>
+            <div className={style.ikenv}>
+              <Button
+                className={style.lkgnsd}
+                component="label"
+                variant="contained"
+                startIcon={<CloudUploadIcon />}
+              >
+                Upload Photo
+                <VisuallyHiddenInput
+                  type="file"
+                  name="profileImage"
+                  accept="image/*"
+                  onChange={(event) =>
+                    handleImageChange(event, signUp.setFieldValue)
+                  }
+                />
+              </Button>
+              <button className={style.signUpBtn} type="submit">
+                sign up
+              </button>
+            </div>
+          </form>
+        ) : undefined}
+        {flagLoginModal ? (
+          <form onSubmit={login.handleSubmit} className={style.start__modal}>
+            <p className={style.efwe}>Sign up</p>
+
+            <input
+              name="email"
+              value={login.values.email}
+              onChange={login.handleChange}
+              type="text"
+              className={style.fsad}
+              placeholder="email"
+            />
+            {login.touched.email && login.errors.email && login.errors.email}
+            <input
+              name="password"
+              value={login.values.password}
+              onChange={login.handleChange}
+              type="text"
+              className={style.fsad}
+              placeholder="password"
+            />
+            {login.touched.password &&
+              login.errors.password &&
+              login.errors.password}
+
+            <div className={style.ikenv}>
+              <button className={style.signUpBtnf} type="submit">
+                sign up
+              </button>
+            </div>
+          </form>
+        ) : undefined}
       </div>
 
       <div className={style.start}>
         <div className={style.home_home_start__top__OWvhx__FFXGv}>
           <div
-            onClick={changePageModeHandler}
+            onClick={() => setFlagLoginModal(true)}
             className={style.home_home_home_start__top__skipBtn__qxhuH__8x4DP}
           >
             skip
@@ -201,9 +280,12 @@ export default function Welcome({ Active }) {
           </div>
 
           <span className={style.sdifuhds}>
-            Dont have an account?
-            <span onClick={() => setFlagModal(true)} className="text-style-1">
-              Sign up
+            if you have an account?
+            <span
+              onClick={() => setFlagLoginModal(true)}
+              className="text-style-1"
+            >
+              log in
             </span>
           </span>
         </div>

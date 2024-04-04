@@ -15,10 +15,12 @@ export default function Search() {
   }, [search]);
 
   useEffect(() => {
-    const usersShow = users.filter((user) =>
+    if (users && users.length) {
+      const usersShow = users.filter((user) =>
       user.userName.trim().toLowerCase().includes(search.trim().toLowerCase())
     );
     setUsersList(usersShow);
+    }
   }, [users]);
 
 

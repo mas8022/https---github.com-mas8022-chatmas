@@ -25,9 +25,7 @@ export default function Timeline() {
       text: "type your comment",
       content: "input",
       buttons: true
-    }).then((res) => {
-      console.log(res);
-    });
+    })
   };
 
   return (

@@ -6,10 +6,10 @@ function connectToDb() {
       return true;
     } else {
       mongoose.connect("mongodb://localhost:27017/mas-chat");
-      console.log("connect to database successfully");
+
     }
   } catch (error) {
-    console.log("don`t connect to database", error);
+    return Response.json({message: "don`t connect to database", error})
   }
 }
 

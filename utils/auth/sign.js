@@ -1,4 +1,4 @@
-import { hash } from "bcryptjs";
+import { compare, hash } from "bcryptjs";
 
 const { sign, verify } = require("jsonwebtoken");
 
@@ -24,4 +24,9 @@ const verifyToken = (token) => {
   }
 };
 
-export { generateToken, verifyToken, hashPassword };
+const verifyPassword = async (password, hashPassword) => {
+  const isValid = await compare(password, hashPassword);
+  return isValid;
+};
+
+export { generateToken, verifyToken, hashPassword, verifyPassword };

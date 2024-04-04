@@ -14,9 +14,7 @@ export default function Profile({ params }) {
       .then((data) => setUser(data));
   }, []);
 
-  useEffect(() => {
-    console.log(user);
-  }, [user]);
+
 
   
 

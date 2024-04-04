@@ -10,7 +10,6 @@ import Me from "../../utils/me";
 export default async function Home() {
   let Active = false;
   const user = await Me();
-  console.log(user);
   if (user) {
     Active = true;
   }

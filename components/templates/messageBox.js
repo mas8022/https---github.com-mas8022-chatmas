@@ -16,7 +16,7 @@ export default function MessageBox() {
           text,
           receiveID,
         }),
-      }).then((res) => console.log(res));
+      })
     }
   };
 

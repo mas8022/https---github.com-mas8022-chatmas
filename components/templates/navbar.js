@@ -29,7 +29,7 @@ export default function Navbar() {
       text: "Are you sure to log out the site ?",
       buttons: true,
     }).then(async (res) => {
-      console.log(res);
+
       if (res) {
         await fetch("/api/logout", { method: "POST" });
         router.refresh();
