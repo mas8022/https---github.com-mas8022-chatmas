@@ -4,9 +4,10 @@ import style from "../../src/app/styles/navbar.module.css";
 import swal from "sweetalert";
 import Link from "next/link";
 import Bg from "../modules/bg";
+import { useRouter } from "next/navigation";
 
 export default function Navbar() {
-
+  const router = useRouter();
   const [flagSide, setFlagSide] = useState(false);
 
   useEffect(() => {
@@ -19,7 +20,22 @@ export default function Navbar() {
       closeSideBarHandler(e);
     });
     return () => window.removeEventListener("click", closeSideBarHandler);
-  })
+  });
+
+  const logOutHandler = () => {
+    swal({
+      icon: "warning",
+      title: "Logout",
+      text: "Are you sure to log out the site ?",
+      buttons: true,
+    }).then(async (res) => {
+      console.log(res);
+      if (res) {
+        await fetch("/api/logout", { method: "POST" });
+        router.refresh();
+      }
+    });
+  };
 
   return (
     <>
@@ -163,13 +179,38 @@ export default function Navbar() {
                 />
               </svg>
 
-              <span className="font-medium text-[1.7rem]">favorites</span>
+              <span className="font-medium text-[1.7rem]">Favorites</span>
             </div>
           </Link>
+          <div
+            onClick={logOutHandler}
+            className="sideItemDeActive active:sideItemActive"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth="1.5"
+              stroke="currentColor"
+              className="w-12 h-12"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M8.25 9V5.25A2.25 2.25 0 0 1 10.5 3h6a2.25 2.25 0 0 1 2.25 2.25v13.5A2.25 2.25 0 0 1 16.5 21h-6a2.25 2.25 0 0 1-2.25-2.25V15m-3 0-3-3m0 0 3-3m-3 3H15"
+              />
+            </svg>
+
+            <span className="font-medium text-[1.7rem]">Log out</span>
+          </div>
         </div>
         <div className="w-full h-[7rem] flex items-center justify-between pt-[1rem] border-t-2 pl-5">
           <h1 className="font-bold text-[1.5rem]">MasChat</h1>
-          <img className="w-[4rem] h-[4rem]" src="/images/logo.png" alt="logo" />
+          <img
+            className="w-[4rem] h-[4rem]"
+            src="/images/logo.png"
+            alt="logo"
+          />
           {/* <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
