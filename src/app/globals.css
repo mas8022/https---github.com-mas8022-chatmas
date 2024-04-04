@@ -54,6 +54,9 @@
   .sideDeActive {
     @apply transition-all duration-500 w-[26rem] h-full flex flex-col gap-5 p-10 bg-white shadow-md fixed top-0 left-[-500px] z-[1001] justify-between pb-[10rem] pl-5;
   }
+  .welcomeDeActive {
+    display: none;
+  }
 
   @media only screen and (max-width: 500px) {
     * {

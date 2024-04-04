@@ -3,17 +3,15 @@ import ProfileTopBottoms from "../../../components/modules/profileTopBottoms";
 import Post from "../../../components/modules/post";
 import { data } from "../../../data";
 import Link from "next/link";
-import { cookies } from "next/headers";
-import { verifyToken } from "../../../utils/auth/sign";
-import usermodel from "../../../models/users";
-import connectToDb from "../../../configs/db";
+import { redirect } from "next/navigation";
+import Me from "../../../utils/me";
 
 export default async function Profile() {
-  const token = cookies().get("token")?.value;
-
-  const tokenPayLoad = verifyToken(token);
-  connectToDb();
-  const user = await usermodel.findOne({ email: tokenPayLoad.email });
+  const user = await Me();
+  if (!user) {
+    contextProfile.setPageMode(false);
+    redirect("/");
+  }
 
   return (
     <div className="w-full p-[3rem] flex flex-col gap-y-5 pb-[10rem]">
@@ -69,8 +67,8 @@ export default async function Profile() {
       </div>
 
       <div className="w-full grid grid-cols-3 gap-2 gap-y-5">
-        {data.slice(0, 10)?.map((item) => (
-          <Post data={item} />
+        {data.slice(0, 10)?.map((item, index) => (
+          <Post key={index} data={item} />
         ))}
       </div>
     </div>

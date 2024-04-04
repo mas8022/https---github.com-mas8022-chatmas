@@ -14,14 +14,20 @@ export default function Profile({ params }) {
       .then((data) => setUser(data));
   }, []);
 
+  useEffect(() => {
+    console.log(user);
+  }, [user]);
+
+  
+
   return (
     <div className="w-full p-[3rem] flex flex-col gap-y-5 pb-[10rem]">
       <ProfileTopBottoms />
 
-      <Link href={`/profiler/${params.id}`} className="h-[10.5rem] w-[100%] flex items-center gap-6">
+      <div className="h-[10.5rem] w-[100%] flex items-center gap-6">
         <img
           src={
-            user.userName
+            user.profileImage
               ? user.profileImage
               : "/images/images.jpg"
           }
@@ -35,7 +41,7 @@ export default function Profile({ params }) {
           </p>
           <p className="text-[14px] text-[#606a81] font-medium">Tehran, Iran</p>
         </div>
-      </Link>
+      </div>
 
       <div className="w-[100%] h-[8rem] flex items-center justify-evenly">
         <div className="h-[100%] flex justify-center flex-col gap-1">
