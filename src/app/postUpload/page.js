@@ -5,8 +5,7 @@ import { styled } from "@mui/material/styles";
 import Button from "@mui/material/Button";
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import Navbar from "../../../components/templates/navbar";
-import useRoute from "../../../utils/useRoute";
-import swal from "sweetalert";
+import Swal from 'sweetalert2'
 
 export default function PostUpload() {
   const [cover, setCover] = useState(
@@ -31,11 +30,12 @@ export default function PostUpload() {
         body: JSON.stringify(values),
       }).then(async (res) => {
         if (res.ok) {
-          await swal({
+          await Swal.fire({
+            position: "top-end",
             icon: "success",
-            title: "Success",
-            text: "Upload Post Successfully",
-            button: false,
+            title: "Upload post successfully",
+            showConfirmButton: false,
+            timer: 1500
           });
           location.reload();
         }
