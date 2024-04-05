@@ -82,8 +82,8 @@ export default function Welcome({ Active }) {
         body: JSON.stringify(values),
       }).then((res) => {
         if (res.ok) {
-          window.scrollTo(0, 0);
           router.refresh();
+          window.scrollTo(0, 0);
         }
       });
 

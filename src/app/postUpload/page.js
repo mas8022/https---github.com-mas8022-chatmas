@@ -5,6 +5,8 @@ import { styled } from "@mui/material/styles";
 import Button from "@mui/material/Button";
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import Navbar from "../../../components/templates/navbar";
+import useRoute from "../../../utils/useRoute";
+import swal from "sweetalert";
 
 export default function PostUpload() {
   const [cover, setCover] = useState(
@@ -22,7 +24,22 @@ export default function PostUpload() {
       }
       return errors;
     },
-    onSubmit: (values, { setSubmitting }) => {
+    onSubmit: async (values, { setSubmitting }) => {
+      await fetch("/api/post/upload", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(values),
+      }).then(async (res) => {
+        if (res.ok) {
+          await swal({
+            icon: "success",
+            title: "Success",
+            text: "Upload Post Successfully",
+            button: false,
+          });
+          location.reload();
+        }
+      });
       setTimeout(() => {
         setSubmitting(false);
       }, 3000);
@@ -58,7 +75,7 @@ export default function PostUpload() {
       onSubmit={formik.handleSubmit}
       className="w-full h-screen flex flex-col gap-7 p-[3rem] pb-[12rem] items-center justify-between"
     >
-    <Navbar/>
+      <Navbar />
       <div className="w-full flex flex-col items-center gap-10">
         <Button
           className="w-full bg-cover h-[30rem] bg-slate-900/50 flex items-center justify-center font-light text-zinc-100 text-[2rem]"

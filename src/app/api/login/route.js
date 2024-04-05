@@ -27,7 +27,6 @@ export async function POST(req) {
       }
     );
   } catch (error) {
-    console.log("api login error ==>", error);
     return Response.json(
       { message: "internal server error", status: 500 },
       error
