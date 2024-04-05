@@ -5,7 +5,7 @@ import { styled } from "@mui/material/styles";
 import Button from "@mui/material/Button";
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import Navbar from "../../../components/templates/navbar";
-import Swal from 'sweetalert2'
+import Swal from "sweetalert2";
 
 export default function PostUpload() {
   const [cover, setCover] = useState(
@@ -35,7 +35,7 @@ export default function PostUpload() {
             icon: "success",
             title: "Upload post successfully",
             showConfirmButton: false,
-            timer: 1500
+            timer: 1500,
           });
           location.reload();
         }
@@ -78,7 +78,7 @@ export default function PostUpload() {
       <Navbar />
       <div className="w-full flex flex-col items-center gap-10">
         <Button
-          className="w-full bg-cover h-[30rem] bg-slate-900/50 flex items-center justify-center font-light text-zinc-100 text-[2rem]"
+          className="w-full !bg-cover !bg-center h-[30rem] bg-slate-900/50 flex items-center justify-center font-light text-zinc-100 text-[2rem]"
           component="label"
           variant="contained"
           startIcon={<CloudUploadIcon />}

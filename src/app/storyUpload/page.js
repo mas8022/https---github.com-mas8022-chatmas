@@ -54,15 +54,14 @@ export default function StoryUpload() {
   };
 
   return (
-
     <form
       onSubmit={formik.handleSubmit}
       className="w-full h-screen flex flex-col gap-7 p-[3rem] pb-[12rem] items-center justify-between"
     >
-      <ProfileTopBottoms/>
+      <ProfileTopBottoms />
       <div className="w-full flex flex-col items-center gap-10">
         <Button
-          className="w-full bg-cover h-[30rem] bg-slate-900/50 flex items-center justify-center font-light text-zinc-100 text-[2rem]"
+          className="w-full !bg-cover !bg-center h-[30rem] bg-slate-900/50 flex items-center justify-center font-light text-zinc-100 text-[2rem]"
           component="label"
           variant="contained"
           startIcon={<CloudUploadIcon />}
