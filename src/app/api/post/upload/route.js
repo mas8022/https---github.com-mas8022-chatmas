@@ -14,7 +14,6 @@ export async function POST(req) {
     if (!image.trim()) {
       return Response.json({ message: "image not find" });
     }
-    console.log("api upload post ==>");
     await postModel.create({ image, content, user: user._id });
     return Response.json({ message: "upload post successfully", status: 201 });
   } catch (error) {
