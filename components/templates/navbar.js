@@ -50,7 +50,7 @@ export default function Navbar() {
         <img
           onClick={() =>
             swal({
-              icon: "warning",
+              icon: "info",
               text: "Welcome to MasChat: Your Ultimate Chat Experience Welcome to MasChat, the premier platform for seamless communication and collaboration. MasChat offers an intuitive interface, robust features, and unparalleled reliability, making it the ideal choice for individuals and businesses alike.",
             })
           }
