@@ -5,17 +5,17 @@ const schema = mongoose.Schema(
   {
     text: {
       type: String,
-      require: true,
+      required: true,
     },
 
     sender: {
       type: mongoose.Types.ObjectId,
       ref: "User",
-      require: true,
+      required: true,
     },
     receiver: {
       type: String,
-      require: true,
+      required: true,
     },
   },
   {

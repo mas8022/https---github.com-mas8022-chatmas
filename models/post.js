@@ -1,14 +1,21 @@
 const mongoose = require("mongoose");
-const userModel = require('@/../models/users');
+import userModel from "../models/users";
 
-const schema = mongoose.Schema(
+const schema = new mongoose.Schema(
   {
-    image: {
+    postImage: {
       type: String,
-      require: true,
+      required: true,
     },
-    content: { type: String, require: false },
-    user: { type: mongoose.Types.ObjectId, ref: "User", require: true },
+    content: { type: String },
+    user: { type: mongoose.Types.ObjectId, ref: "User", required: true },
+    likes: {
+      type: Number,
+      default: 0,
+    },
+  },
+  {
+    timeStamps: true,
   }
 );
 
