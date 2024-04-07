@@ -13,7 +13,7 @@ async function getPost(postId) {
   return post;
 }
 
-async function getUserPosts({ userId }) {
+async function getUserPosts( userId ) {
   connectToDb();
   const posts = await postModel.find({ user: userId });
   return posts;

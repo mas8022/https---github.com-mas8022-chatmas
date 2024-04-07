@@ -4,7 +4,7 @@ import style from "../../src/app/styles/timeline.module.css";
 import Bg from "./bg";
 import swal from "sweetalert";
 
-export default function Timeline() {
+export default function Timeline({ user, post }) {
   const [active, setActive] = useState(false);
 
   useEffect(() => {
@@ -24,8 +24,8 @@ export default function Timeline() {
       title: "Comment",
       text: "type your comment",
       content: "input",
-      buttons: true
-    })
+      buttons: true,
+    });
   };
 
   return (
@@ -33,13 +33,13 @@ export default function Timeline() {
       <div className={style.timeline__top}>
         <div className={style.timeline__top__right}>
           <img
-            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQzvcxSjwABvomYZsgSIsYinTKxioBwSJKi5ojOY-aRyQ&s"
+            src={user.profileImage ? user.profileImage : "/images/images.jpg"}
             alt="store"
             className={style.timeline__top__right__right}
           />
           <div className={style.timeline__top__right__left}>
-            <p className={style.fgfd}>Sara Mathew</p>
-            <p className={style.ertyre}>Sukabumi, Indonesia</p>
+            <p className={style.fgfd}>{user.userName}</p>
+            <p className={style.ertyre}>Mazandaran, Iran</p>
           </div>
         </div>
 
@@ -51,32 +51,31 @@ export default function Timeline() {
         />
         <Bg active={active} />
 
-        {active? <><div className="w-[15rem] h-[5rem] flex items-center justify-between p-6 bg-white z-[1000] absolute right-10 top-24 shadow-md rounded-3xl">
-          <img
-            onClick={commentHandler}
-            className="w-[2.5rem] h-[2.5rem] active:scale-95 transition-all duration-75"
-            src="/images/comments.svg"
-            alt="comment button"
-          />
-          <img
-            className="w-[2.5rem] h-[2.5rem] active:scale-95 transition-all duration-75"
-            src="/images/like.svg"
-            alt="like button"
-          />
-          <img
-            className="w-[2.5rem] h-[2.5rem] active:scale-95 transition-all duration-75"
-            src="/images/dislike.svg"
-            alt="dislike button"
-          />
-        </div></>:null}
-
-        
-
-
-
+        {active ? (
+          <>
+            <div className="w-[15rem] h-[5rem] flex items-center justify-between p-6 bg-white z-[1000] absolute right-10 top-24 shadow-md rounded-3xl">
+              <img
+                onClick={commentHandler}
+                className="w-[2.5rem] h-[2.5rem] active:scale-95 transition-all duration-75"
+                src="/images/comments.svg"
+                alt="comment button"
+              />
+              <img
+                className="w-[2.5rem] h-[2.5rem] active:scale-95 transition-all duration-75"
+                src="/images/like.svg"
+                alt="like button"
+              />
+              <img
+                className="w-[2.5rem] h-[2.5rem] active:scale-95 transition-all duration-75"
+                src="/images/dislike.svg"
+                alt="dislike button"
+              />
+            </div>
+          </>
+        ) : null}
       </div>
 
-      <div className={style.timeline__bottom}></div>
+      <img src={post.postImage} className={style.timeline__bottom} alt="post image" />
     </div>
   );
 }

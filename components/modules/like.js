@@ -8,13 +8,9 @@ export default function Like({ post }) {
     await setFlag((p) => (p = !p));
 
     if (flag) {
-      await fetch(`/api/post/disLike/${post._id}`, { method: "POST" }).then(
-        (res) => console.log(res)
-      );
+      await fetch(`/api/post/disLike/${post._id}`, { method: "POST" });
     } else {
-      await fetch(`/api/post/likePost/${post._id}`, { method: "POST" }).then(
-        (res) => console.log(res)
-      );
+      await fetch(`/api/post/likePost/${post._id}`, { method: "POST" });
     }
   };
 

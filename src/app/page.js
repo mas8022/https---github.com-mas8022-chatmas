@@ -6,6 +6,7 @@ import StoreList from "../../components/templates/storeList";
 import Timeline from "../../components/modules/timeline";
 import Welcome from "../../components/templates/welcome";
 import Me from "../../utils/me";
+import { getAllPosts } from "@/utils/postTools";
 
 export default async function Home() {
   let Active = false;
@@ -13,6 +14,8 @@ export default async function Home() {
   if (user) {
     Active = true;
   }
+  const posts = await getAllPosts();
+
 
   return (
     <>
@@ -22,11 +25,9 @@ export default async function Home() {
         <Search />
         <StoreList />
         <div className="w-full flex flex-col gap-8 pb-[12rem]">
-          <Timeline />
-          <Timeline />
-          <Timeline />
-          <Timeline />
-          <Timeline />
+          {posts && posts.length
+            ? posts.map((post) => <Timeline user={user} post={post} />)
+            : null}
         </div>
       </div>
     </>
