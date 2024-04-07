@@ -1,5 +1,5 @@
 import connectToDb from "../configs/db";
-import postModel from "../models/post";
+import postModel from '../models/post';
 
 async function getAllPosts() {
   connectToDb();
@@ -19,14 +19,7 @@ async function getUserPosts({ userId }) {
   return posts;
 }
 
-async function likePost({ postId }) {
-  connectToDb();
-  await postModel.findOneAndUpdate({ _id: postId }, { $inc: { likes: 1 } });
-}
 
-async function disLikePost({ postId }) {
-  connectToDb();
-  await postModel.findOneAndUpdate({ _id: postId }, { $inc: { likes: -1 } });
-}
 
-export { getAllPosts, getPost, getUserPosts, likePost, disLikePost };
+
+export { getAllPosts, getPost, getUserPosts };

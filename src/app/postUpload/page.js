@@ -8,22 +8,22 @@ import Navbar from "../../../components/templates/navbar";
 import Swal from "sweetalert2";
 
 export default function PostUpload() {
-  const [cover, setCover] = useState(
-    "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOEAAADhCAMAAAAJbSJIAAAAA1BMVEUFUUPtxIMOAAAASElEQVR4nO3BgQAAAADDoPlTX+AIVQEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwDcaiAAFXD1ujAAAAAElFTkSuQmCC"
-  );
+  const [cover, setCover] = useState('');
+
   const formik = useFormik({
     initialValues: {
-      image: "",
+      postImage: "",
       content: "",
     },
     validate: (values) => {
       const errors = {};
-      if (!values.image.trim()) {
-        errors.image = "don`t upload any things";
+      if (!values.postImage.trim()) {
+        errors.postImage = "don`t upload any things";
       }
       return errors;
     },
     onSubmit: async (values, { setSubmitting }) => {
+
       await fetch("/api/post/upload", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -37,7 +37,8 @@ export default function PostUpload() {
             showConfirmButton: false,
             timer: 1500,
           });
-          location.reload();
+          setCover("");
+          values.content = "";
         }
       });
       setTimeout(() => {
@@ -63,7 +64,7 @@ export default function PostUpload() {
     if (file) {
       const reader = new FileReader();
       reader.onload = () => {
-        setFieldValue("image", reader.result);
+        setFieldValue("postImage", reader.result);
         setCover(reader.result);
       };
       reader.readAsDataURL(file);
@@ -78,16 +79,16 @@ export default function PostUpload() {
       <Navbar />
       <div className="w-full flex flex-col items-center gap-10">
         <Button
-          className="w-full !bg-cover !bg-center h-[30rem] bg-slate-900/50 flex items-center justify-center font-light text-zinc-100 text-[2rem]"
+          className="w-full !bg-cover !rounded-2xl !bg-center h-[30rem] flex items-center justify-center font-light text-zinc-100 text-[2rem]"
           component="label"
           variant="contained"
           startIcon={<CloudUploadIcon />}
-          style={{ background: `url('${cover}')` }}
+          style={cover?{ background: `url('${cover}')` }:{ background: "black" }}
         >
           Upload file
           <VisuallyHiddenInput
             type="file"
-            name="image"
+            name="postImage"
             accept="image/*"
             onChange={(event) => handleImageChange(event, formik.setFieldValue)}
           />
