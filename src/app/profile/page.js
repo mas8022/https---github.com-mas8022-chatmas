@@ -71,7 +71,7 @@ export default async function Profile() {
         </Link>
       </div>
 
-      {!posts.length ? (
+      {posts.length ? (
         <div className="w-full grid grid-cols-3 gap-2 gap-y-5">
           {posts.slice(0, 10)?.map((post) => (
             <Post key={post._id} data={JSON.parse(JSON.stringify(post))} />

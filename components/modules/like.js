@@ -11,6 +11,8 @@ export default function Like({ post }) {
       await fetch(`/api/post/disLike/${post._id}`, { method: "POST" });
     } else {
       await fetch(`/api/post/likePost/${post._id}`, { method: "POST" });
+      await fetch(`/api/post/favorite/${post._id}`, { method: "POST" });
+
     }
   };
 

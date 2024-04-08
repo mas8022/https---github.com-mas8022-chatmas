@@ -33,12 +33,16 @@ export default function Timeline({ user, post }) {
       <div className={style.timeline__top}>
         <div className={style.timeline__top__right}>
           <img
-            src={user.profileImage ? user.profileImage : "/images/images.jpg"}
+            src={
+              user && user.profileImage
+                ? user.profileImage
+                : "/images/images.jpg"
+            }
             alt="store"
             className={style.timeline__top__right__right}
           />
           <div className={style.timeline__top__right__left}>
-            <p className={style.fgfd}>{user.userName}</p>
+            <p className={style.fgfd}>{user ? user.userName : null}</p>
             <p className={style.ertyre}>Mazandaran, Iran</p>
           </div>
         </div>
@@ -75,7 +79,11 @@ export default function Timeline({ user, post }) {
         ) : null}
       </div>
 
-      <img src={post.postImage} className={style.timeline__bottom} alt="post image" />
+      <img
+        src={post.postImage}
+        className={style.timeline__bottom}
+        alt="post image"
+      />
     </div>
   );
 }
