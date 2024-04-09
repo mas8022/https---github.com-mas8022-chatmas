@@ -2,6 +2,7 @@ import React from "react";
 import Timeline from "../../../components/modules/timeline";
 import Me from "../../../utils/me";
 import { getUserPosts } from "@/utils/postTools";
+import NoExist from "@/components/modules/noExist";
 
 export default async function Post() {
   const user = await Me();
@@ -14,7 +15,7 @@ export default async function Post() {
           <Timeline user={user} post={JSON.parse(JSON.stringify(post))} />
         ))
       ) : (
-        <h2>mohammad</h2>
+        <NoExist upload={false} />
       )}
     </div>
   );

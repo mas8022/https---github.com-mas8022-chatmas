@@ -2,9 +2,7 @@ import React from "react";
 import userModel from "../../../../models/users";
 import connectToDb from "../../../../configs/db";
 import EditForm from "../../../../components/templates/editForm";
-import { verifyToken } from "../../../../utils/auth/sign";
-import { cookies } from "next/headers";
-import { redirect } from "next/navigation";
+
 export default async function Profiler({ params }) {
   connectToDb();
   const user = await userModel.findOne({ _id: params.id });

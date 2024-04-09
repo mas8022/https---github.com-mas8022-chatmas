@@ -17,8 +17,6 @@ export default function Following() {
     setUsers(filterUser);
   };
 
-
- 
   return (
     <div className="w-full p-[3rem] pb-[10rem]">
       <div className="w-full h-[4rem] rounded-full border border-1 border-black/20 flex pl-5 items-center gap-3 mb-20">
@@ -37,9 +35,9 @@ export default function Following() {
       </div>
 
       <div className="w-full flex flex-col gap-5">
-        {users?.map((user, index) => (
-          <ContactBox {...user} key={index}/>
-        ))}
+        {users
+          ? users.map((user, index) => <ContactBox {...user} key={index} />)
+          : null}
       </div>
     </div>
   );

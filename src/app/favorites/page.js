@@ -20,7 +20,7 @@ export default async function Favorites() {
       <div className="w-[100%] flex flex-col gap-5 p-[3rem]">
         <Search />
         <div className="flex flex-col w-[100%] items-center gap-y-12">
-          {!posts && posts.length
+          {posts && posts.length
             ? posts.map((item) => (
                 <Timeline
                   user={JSON.parse(JSON.stringify(item.user))}
