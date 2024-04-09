@@ -1,20 +1,39 @@
-"use client";
-import React, { useState } from "react";
+"use client"
+import React, { useEffect, useState } from "react";
 
 export default function Like({ post }) {
   const [flag, setFlag] = useState(false);
+  const [useClientClicked, setUseClientClicked] = useState(false); // New state for "use client" button
 
   const likeHandler = async () => {
-    await setFlag((p) => (p = !p));
+    console.log("click ==>", flag);
 
     if (flag) {
+      
       await fetch(`/api/post/disLike/${post._id}`, { method: "POST" });
+      await fetch(`/api/post/deleteFavorite/${post._id}`, { method: "POST" });
+      setFlag(false);
     } else {
       await fetch(`/api/post/likePost/${post._id}`, { method: "POST" });
       await fetch(`/api/post/favorite/${post._id}`, { method: "POST" });
-
+      setFlag(true);
     }
   };
+
+  useEffect(() => {
+    if (!useClientClicked) { // Only fetch data if "use client" is not clicked
+      fetch(`/api/post/likeReminder/${post._id}`)
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.isLiked) {
+            setFlag(true);
+            console.log("load ==>", flag);
+          } else {
+            setFlag(false);
+          }
+        });
+    }
+  }, [useClientClicked]); // Depend on useClientClicked state
 
   return flag ? (
     <svg

@@ -1,18 +1,18 @@
-import Me from "@/utils/me";
 import favoriteModel from "@/models/favorite";
+import Me from "@/utils/me";
 
 export async function POST(req, { params }) {
   try {
     const user = await Me();
     const postID = params.id;
 
-    await favoriteModel.create({
+    await favoriteModel.findOneAndDelete({
       user: user._id,
       post: postID,
     });
-    
+
     return Response.json({
-      message: "add post to favorite document successfully",
+      message: "delete post from favorite document successfully",
     });
   } catch (error) {
     return Response.json(
@@ -21,4 +21,3 @@ export async function POST(req, { params }) {
     );
   }
 }
-

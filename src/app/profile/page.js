@@ -78,7 +78,7 @@ export default async function Profile() {
           ))}
         </div>
       ) : (
-        <NoExist />
+        <NoExist upload={true} />
       )}
     </div>
   );
