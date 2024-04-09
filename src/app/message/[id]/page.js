@@ -1,8 +1,17 @@
 import React from "react";
-import Text from "../../../components/modules/text";
-import MessageBox from "../../../components/templates/messageBox";
+import Text from "../../../../components/modules/text";
+import MessageBox from "../../../../components/templates/messageBox";
+import userModel from "@/models/users";
+import Me from "@/utils/me";
 
-export default function Message() {
+export default async function Message({ params }) {
+  const user = await userModel.findOne(
+    { _id: params.id },
+    "_id userName profileImage"
+  );
+  const userData = await Me();
+  const from = userData._id;
+
   return (
     <div className="w-full h-full flex items-center flex-col">
       <div className="w-full h-[10rem] flex items-center gap-5 px-11">
@@ -13,7 +22,7 @@ export default function Message() {
         />
         <div className="w-full h-full flex flex-col gap-3 justify-center">
           <span className="text-slate-700 font-extrabold text-[1.7rem]">
-            Sara Mathew
+            {user.userName}
           </span>
           <span className="text-[1.4rem] font-medium">online</span>
         </div>
@@ -30,7 +39,10 @@ export default function Message() {
         <Text text={"hello hossein efrsadfsdf khobi"} />
       </div>
 
-      <MessageBox />
+      <MessageBox
+        to={JSON.parse(JSON.stringify(user._id))}
+        from={JSON.parse(JSON.stringify(from))}
+      />
     </div>
   );
 }

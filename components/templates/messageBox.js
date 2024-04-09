@@ -1,22 +1,22 @@
 "use client";
 import React, { useState } from "react";
 
-export default function MessageBox() {
+export default function MessageBox({ to, from }) {
   const [text, setText] = useState("");
-  const [receiveID, setReceiveID] = useState("pdsdifsdpfnsdpifndsifsa");
 
   const sendMessageHandler = async () => {
     if (text.trim()) {
-      await fetch("/api/message", {
+      await fetch("/api/messageStart", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
+          from,
+          to,
           text,
-          receiveID,
         }),
-      })
+      }).then((res) => console.log(res));
     }
   };
 

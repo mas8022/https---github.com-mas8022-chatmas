@@ -1,19 +1,19 @@
 const mongoose = require("mongoose");
-import userModel from '../models/users'
+require("./users");
 
 const schema = mongoose.Schema(
   {
-    text: {
-      type: String,
-      required: true,
-    },
-
-    sender: {
+    from: {
       type: mongoose.Types.ObjectId,
       ref: "User",
       required: true,
     },
-    receiver: {
+    to: {
+      type: mongoose.Types.ObjectId,
+      ref: "User",
+      required: true,
+    },
+    text: {
       type: String,
       required: true,
     },
@@ -23,6 +23,6 @@ const schema = mongoose.Schema(
   }
 );
 
-const model = mongoose.models.Text || mongoose.model("Text", schema);
+const model = mongoose.models.MessageStart || mongoose.model("MessageStart", schema);
 
 export default model;

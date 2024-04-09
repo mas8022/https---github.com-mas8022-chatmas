@@ -1,17 +1,21 @@
 const { default: connectToDb } = require("../../../../configs/db");
-import messageModel from "../../../../models/text";
+import messageStartModel from "../../../../models/messageStart";
+
 export async function POST(req) {
   try {
     connectToDb();
-    const { text, receiveID } = await req.json();
+    const { from, to, text } = await req.json();
 
-    await messageModel.create({ text, receiveID });
+
+    console.log("message data ==>",{ from, to, text });
+
+    await messageStartModel.create({ from, to, text });
 
     return Response.json(
       { message: "send message successfully" },
       { status: 201 }
     );
-} catch (error) {
+  } catch (error) {
     return Response.json(
       { message: "Internal Server Error" },
       { status: 500, error }

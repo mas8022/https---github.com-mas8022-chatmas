@@ -1,9 +1,8 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import Timeline from "../../../../components/modules/timeline";
+// import Timeline from "../../../../components/modules/timeline";
 import ProfileTopBottoms from "../../../../components/modules/profileTopBottoms";
 import Link from "next/link";
-import { stringify } from "postcss";
 
 export default function Profile({ params }) {
   const [user, setUser] = useState({});
@@ -14,21 +13,13 @@ export default function Profile({ params }) {
       .then((data) => setUser(data));
   }, []);
 
-
-
-  
-
   return (
     <div className="w-full p-[3rem] flex flex-col gap-y-5 pb-[10rem]">
       <ProfileTopBottoms />
 
       <div className="h-[10.5rem] w-[100%] flex items-center gap-6">
         <img
-          src={
-            user.profileImage
-              ? user.profileImage
-              : "/images/images.jpg"
-          }
+          src={user.profileImage ? user.profileImage : "/images/images.jpg"}
           alt="user image"
           className="w-[8.8rem] h-[8.8rem] rounded-[100%] relative"
         />
@@ -66,12 +57,12 @@ export default function Profile({ params }) {
 
       <div className="flex items-center justify-between w-[100%] h-[5rem] gap-[2rem] mb-12">
         <Link
+          href={`/message/${params.id}`}
           style={{
             background:
               "linear-gradient(to right, #cffa7c 0%, #9ce89d 100%), linear-gradient(to bottom, #e5e6ed, #e5e6ed)",
           }}
           className="rounded-[30px] flex items-center justify-center w-[18rem] h-[100%] font-medium text-[16px] text-[#191919]"
-          href={"/message"}
         >
           Message
         </Link>
@@ -79,7 +70,7 @@ export default function Profile({ params }) {
           + Follow
         </div>
       </div>
-      <Timeline />
+      {/* <Timeline /> */}
     </div>
   );
 }

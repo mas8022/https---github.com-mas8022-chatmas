@@ -1,20 +1,17 @@
-"use client"
+"use client";
 import React, { useEffect, useState } from "react";
 
 export default function Like({ post }) {
   const [flag, setFlag] = useState(false);
-  const [useClientClicked, setUseClientClicked] = useState(false); 
+  const [useClientClicked, setUseClientClicked] = useState(false);
 
   const likeHandler = async () => {
-
+    console.log('like api ==>');
     if (flag) {
-      
       await fetch(`/api/post/disLike/${post._id}`, { method: "POST" });
-      await fetch(`/api/post/deleteFavorite/${post._id}`, { method: "POST" });
       setFlag(false);
     } else {
       await fetch(`/api/post/likePost/${post._id}`, { method: "POST" });
-      await fetch(`/api/post/favorite/${post._id}`, { method: "POST" });
       setFlag(true);
     }
   };
@@ -31,7 +28,7 @@ export default function Like({ post }) {
           }
         });
     }
-  }, [useClientClicked]); 
+  }, [useClientClicked]);
 
   return flag ? (
     <svg
