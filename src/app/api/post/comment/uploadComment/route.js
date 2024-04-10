@@ -1,25 +1,20 @@
 import connectToDb from "@/configs/db";
 import Me from "@/utils/me";
-import postModel from '@/models/post'
+import commentModel from "@/models/comment";
 
 export async function POST(req) {
   try {
     connectToDb();
+    const user = await Me();
     const { text, post } = await req.json();
 
-    const user = await Me();
 
-    const comment = {
+
+   await commentModel.create({
       commenter: user._id,
       post,
       text,
-    };
-
-    await postModel.findByIdAndUpdate(
-      { _id: post },
-      { $push: { comments: comment } }
-    );
-
+    })
 
     return Response.json(
       { message: "send comment successfully" },

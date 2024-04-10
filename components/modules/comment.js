@@ -1,29 +1,28 @@
 import Link from "next/link";
 import React from "react";
 
-export default function Comment() {
+export default function Comment({ comment }) {
+
   return (
     <div className="w-full bg-white/50 shadow-lg flex flex-col gap-10 p-7">
-      <Link className="w-full flex gap-6 items-center" href={`/contact/${"54rew"}`}>
+      <Link
+        className="w-full flex gap-6 items-center"
+        href={`/contact/${"54rew"}`}
+      >
         <img
-          src="/images/good-nature-homepage-hero_2-1280x640.jpg"
-          alt="user image"
+          src={comment.commenter.profileImage}
+          alt="commenter image"
           className="w-[6rem] h-[6rem] rounded-full"
         />
         <div className="text-[1.4rem] w-full h-[4rem] flex items-center justify-center border border-white/0 border-b-slate-800">
-          Mohammad amin saidi rad
+          {comment.commenter.userName}
         </div>
       </Link>
 
-      <p className="text-[1.5rem]">
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Quis, nihil
-        dolore incidunt atque vero assumenda odio optio animi ipsum cum officia
-        recusandae fugit non repudiandae architecto reprehenderit sequi hic
-        minus.
-      </p>
+      <p className="text-[1.5rem]">{comment.text}</p>
 
       <div className="w-full h-[4rem] flex items-center justify-between">
-        <span className="text-[1.25rem]">10/23/2024</span>
+        <span className="text-[1.25rem]">{comment.createdAt.slice(0, 10).replace(/-/gi,"/")}</span>
         <div className="w-[10rem] h-full flex justify-end items-center gap-5">
           <svg
             xmlns="http://www.w3.org/2000/svg"

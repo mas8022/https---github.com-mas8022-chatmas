@@ -1,23 +1,23 @@
 "use client";
 import React, { useEffect, useState } from "react";
 
-export default function Like({ post }) {
+export default function Like({ postId }) {
   const [flag, setFlag] = useState(false);
   const [useClientClicked, setUseClientClicked] = useState(false);
 
   const likeHandler = async () => {
     if (flag) {
-      await fetch(`/api/post/disLike/${post._id}`, { method: "POST" });
+      await fetch(`/api/post/disLike/${postId}`, { method: "POST" });
       setFlag(false);
     } else {
-      await fetch(`/api/post/likePost/${post._id}`, { method: "POST" });
+      await fetch(`/api/post/likePost/${postId}`, { method: "POST" });
       setFlag(true);
     }
   };
 
   useEffect(() => {
     if (!useClientClicked) {
-      fetch(`/api/post/likeReminder/${post._id}`)
+      fetch(`/api/post/likeReminder/${postId}`)
         .then((res) => res.json())
         .then((data) => {
           if (data.isLiked) {

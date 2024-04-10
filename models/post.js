@@ -15,27 +15,9 @@ const schema = new Schema(
       type: Number,
       default: 0,
     },
-    comments: [
-      {
-        commenter: {
-          type: mongoose.Types.ObjectId,
-          ref: "User",
-          required: true,
-        },
-        post: {
-          type: mongoose.Types.ObjectId,
-          ref: "Post",
-          required: true,
-        },
-        text: {
-          type: String,
-          required: true,
-        },
-      },
-    ],
   },
   {
-    timeStamps: true,
+    timestamps: true,
   }
 );
 

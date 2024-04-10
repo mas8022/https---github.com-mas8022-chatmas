@@ -32,7 +32,7 @@ export default function MoreTimeLine({ post }) {
         src="/images/comments.svg"
         alt="comment button"
       />
-      <Like post={JSON.parse(JSON.stringify(post))} />
+      <Like postId={post._id} />
     </div>
   );
 }
