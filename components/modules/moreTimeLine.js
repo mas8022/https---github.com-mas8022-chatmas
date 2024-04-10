@@ -4,6 +4,7 @@ import swal from "sweetalert";
 import Like from "./like";
 
 export default function MoreTimeLine({ post }) {
+
   const commentHandler = () => {
     swal({
       title: "Comment",
@@ -17,7 +18,7 @@ export default function MoreTimeLine({ post }) {
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify(res),
+          body: JSON.stringify({ text: res, post: post._id }),
         });
       }
     });
@@ -31,7 +32,7 @@ export default function MoreTimeLine({ post }) {
         src="/images/comments.svg"
         alt="comment button"
       />
-      <Like post={post} />
+      <Like post={JSON.parse(JSON.stringify(post))} />
     </div>
   );
 }

@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 const { Schema } = mongoose;
 require("./users");
+require("@/models/post");
 
 const schema = new Schema(
   {
@@ -14,17 +15,24 @@ const schema = new Schema(
       type: Number,
       default: 0,
     },
-    comments: {
-      text: {
-        type: String,
-        required: true,
+    comments: [
+      {
+        commenter: {
+          type: mongoose.Types.ObjectId,
+          ref: "User",
+          required: true,
+        },
+        post: {
+          type: mongoose.Types.ObjectId,
+          ref: "Post",
+          required: true,
+        },
+        text: {
+          type: String,
+          required: true,
+        },
       },
-      commenter: {
-        type: mongoose.Types.ObjectId,
-        ref: "User",
-        required: true,
-      },
-    },
+    ],
   },
   {
     timeStamps: true,

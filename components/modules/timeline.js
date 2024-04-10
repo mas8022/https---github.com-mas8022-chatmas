@@ -1,9 +1,11 @@
+
 import React from "react";
 import style from "../../src/app/styles/timeline.module.css";
 import Link from "next/link";
 import MoreTimeLine from "./moreTimeLine";
 
 export default function Timeline({ user, post }) {
+
   return (
     <div className={style.timeline}>
       <div className={style.timeline__top}>
@@ -22,7 +24,7 @@ export default function Timeline({ user, post }) {
             <p className={style.ertyre}>Mazandaran, Iran</p>
           </div>
         </div>
-      <MoreTimeLine post={post} />
+      <MoreTimeLine post={JSON.parse(JSON.stringify(post))} />
       </div>
       
 
