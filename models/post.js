@@ -14,6 +14,17 @@ const schema = new Schema(
       type: Number,
       default: 0,
     },
+    comments: {
+      text: {
+        type: String,
+        required: true,
+      },
+      commenter: {
+        type: mongoose.Types.ObjectId,
+        ref: "User",
+        required: true,
+      },
+    },
   },
   {
     timeStamps: true,

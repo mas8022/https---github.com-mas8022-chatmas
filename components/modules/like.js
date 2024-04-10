@@ -6,7 +6,6 @@ export default function Like({ post }) {
   const [useClientClicked, setUseClientClicked] = useState(false);
 
   const likeHandler = async () => {
-    console.log('like api ==>');
     if (flag) {
       await fetch(`/api/post/disLike/${post._id}`, { method: "POST" });
       setFlag(false);

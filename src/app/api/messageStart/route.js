@@ -6,9 +6,6 @@ export async function POST(req) {
     connectToDb();
     const { from, to, text } = await req.json();
 
-
-    console.log("message data ==>",{ from, to, text });
-
     await messageStartModel.create({ from, to, text });
 
     return Response.json(

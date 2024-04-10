@@ -17,7 +17,7 @@ export default async function ShowPost({ params }) {
         <p className="text-[1.4rem] w-[87%] font-bold">{post.content}</p>
         <Like post={post} />
       </div>
-      <div className="w-full flex flex-col gap-6" s>
+      <div className="w-full flex flex-col gap-6">
         <Comment />
         <Comment />
         <Comment />
