@@ -3,7 +3,7 @@ import postModel from '../models/post';
 
 async function getAllPosts() {
   connectToDb();
-  const posts = await postModel.find({});
+  const posts = await postModel.find({}).populate('user', "profileImage userName");
   return posts;
 }
 

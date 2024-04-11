@@ -1,8 +1,15 @@
+"use client";
 import Link from "next/link";
 import React from "react";
 
 export default function Comment({ comment }) {
-
+  console.log(comment);
+  const likeHandler = () => {
+    fetch(`/api/post/comment/like/${comment._id}`, { method: "POST" });
+  };
+  const disLikeHandler = () => {
+    fetch(`/api/post/comment/disLike/${comment._id}`, { method: "POST" });
+  };
   return (
     <div className="w-full bg-white/50 shadow-lg flex flex-col gap-10 p-7">
       <Link
@@ -22,9 +29,12 @@ export default function Comment({ comment }) {
       <p className="text-[1.5rem]">{comment.text}</p>
 
       <div className="w-full h-[4rem] flex items-center justify-between">
-        <span className="text-[1.25rem]">{comment.createdAt.slice(0, 10).replace(/-/gi,"/")}</span>
+        <span className="text-[1.25rem]">
+          {comment.createdAt.slice(0, 10).replace(/-/gi, "/")}
+        </span>
         <div className="w-[10rem] h-full flex justify-end items-center gap-5">
           <svg
+            onClick={likeHandler}
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
             viewBox="0 0 24 24"
@@ -39,6 +49,7 @@ export default function Comment({ comment }) {
             />
           </svg>
           <svg
+            onClick={disLikeHandler}
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
             viewBox="0 0 24 24"
