@@ -122,7 +122,7 @@ export default function Navbar() {
               <span className="font-medium text-[1.7rem]">Contacts</span>
             </div>
           </Link>
-          <Link href={"/stories"}>
+          <Link href={"/"}>
             <div className="sideItemDeActive active:sideItemActive">
               <svg
                 xmlns="http://www.w3.org/2000/svg"

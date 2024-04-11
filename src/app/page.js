@@ -23,10 +23,10 @@ export default async function Home() {
       <div className={style.home}>
         <Navbar />
         <Search />
-        <StoreList />
+        {/* <StoreList /> */}
         <div className="w-full flex flex-col gap-8 pb-[12rem]">
           {posts && posts.length
-            ? posts.map((post) => <Timeline post={post} />)
+            ? posts.slice(0,3).map((post) => <Timeline post={post} />)
             : null}
         </div>
       </div>
