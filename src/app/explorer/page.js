@@ -1,10 +1,17 @@
 import React from "react";
-import { data } from "../../../data";
 import Post from "../../../components/modules/post";
-export default function Explorer() {
+import { getAllPosts } from "@/utils/postTools";
+
+export default async function Explorer() {
+  const posts = await getAllPosts()
+
   return (
-    <div className="w-full min-h-screen pb-[8rem] grid grid-cols-3">
-      {data ? data.map((item) => <Post data={item} />) : null}
+    <div className="w-full flex items-center">
+      <div className="mx-auto pb-[8rem] grid grid-cols-3">
+     {posts.slice(0, 10)?.map((post) => (
+            <Post key={post._id} data={JSON.parse(JSON.stringify(post))} />
+          ))}
+    </div>
     </div>
   );
 }

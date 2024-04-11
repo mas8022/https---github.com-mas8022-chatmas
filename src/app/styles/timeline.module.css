@@ -1,7 +1,8 @@
 .timeline {
-  width: 100%;
+  max-width: 36rem;
   height: auto;
   position: relative;
+  margin: 0 auto;
 }
 
 .timeline__bottom {
