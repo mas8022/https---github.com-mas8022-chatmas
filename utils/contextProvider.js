@@ -3,10 +3,17 @@ import React, { useEffect, useState } from "react";
 import context from "./context";
 
 const MyContextProvider = ({ children }) => {
-  const [pageMode, setPageMode] = useState(() => {
-    const localPageMode = JSON.parse(localStorage.getItem("pageMode"));
-    return localPageMode ? localPageMode : false;
-  });
+  const [pageMode, setPageMode] = useState(false);
+
+  useEffect(() => {
+    localStorage.setItem("pageMode", JSON.stringify(pageMode));
+    if (JSON.parse(localStorage.getItem("pageMode"))) {
+      const localPageMode = JSON.parse(localStorage.getItem("pageMode"));
+      setPageMode(localPageMode);
+    } else {
+      setPageMode(false);
+    }
+  }, []);
 
   useEffect(() => {
     localStorage.setItem("pageMode", JSON.stringify(pageMode));

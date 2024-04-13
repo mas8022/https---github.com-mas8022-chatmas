@@ -6,41 +6,47 @@ import { redirect } from "next/navigation";
 import Me from "../../../utils/me";
 import postModel from "../../../models/post";
 import NoExist from "@/components/modules/noExist";
+import followModel from "@/models/favorite";
 
 export default async function Profile() {
-  const user = await Me();
-  if (!user) {
+  const me = await Me();
+  console.log("me data ==>", me);
+  if (!me) {
     contextProfile.setPageMode(false);
     redirect("/");
   }
+  const posts = await postModel.countDocuments({ user: me._id });
+  console.log("posts data ==>", posts);
 
-  const posts = await postModel.find({ user: user._id });
+  const followings = await followModel.find({ user: me._id });
+
+  console.log(followings);
 
   return (
     <div className="w-full p-[3rem] flex flex-col gap-y-5 pb-[10rem]">
       <ProfileTopBottoms />
 
       <div className="h-[10.5rem] w-[100%] flex items-center gap-6">
-        <Link href={`/profiler/${user._id}`}>
+        <Link href={`/profiler/${me._id}`}>
           <img
-            src={user?.profileImage ? user.profileImage : "/images/images.jpg"}
+            src={me?.profileImage ? me.profileImage : "/images/images.jpg"}
             className="w-[8.8rem] h-[8.8rem] rounded-[100%] bg-black relative !bg-cover !bg-no-repeat !bg-center"
           />
         </Link>
 
-        <div className="h-[100%] flex flex-col justify-center gap-[3px]">
+        <div className="h-full flex flex-col justify-center gap-[3px]">
           <p className="text-[1.8rem] font-semibold text-[#000]">
-            {user?.userName}
+            {me?.userName}
           </p>
           <p className="text-[14px] text-[#606a81] font-medium">Tehran, Iran</p>
         </div>
       </div>
 
-      <div className="w-[100%] h-[8rem] flex items-center justify-evenly">
+      <div className="w-full h-[8rem] flex items-center justify-evenly">
         <Link href={"/posts"}>
           <div className="h-[100%] flex justify-center flex-col gap-1">
             <span className="text-[18px] font-bold">
-              {posts.length ? posts.length : 0}
+              {posts ? posts : 0}
             </span>
             <span className="text-[14px] font-extrabold text-[#606a81]">
               Posts
@@ -63,7 +69,9 @@ export default async function Profile() {
 
         <Link href={"/following"}>
           <div className="h-[100%] flex justify-center flex-col gap-3">
-            <span className="text-[18px] font-bold">310</span>
+            <span className="text-[18px] font-bold">
+              {followings && followings.length ? followings.length : 0}
+            </span>
             <span className="text-[14px] font-extrabold text-[#606a81]">
               Following
             </span>
@@ -74,7 +82,11 @@ export default async function Profile() {
       {posts.length ? (
         <div className="w-full grid grid-cols-3 gap-2 gap-y-5">
           {posts.slice(0, 10)?.map((post) => (
-            <Post key={post._id} data={JSON.parse(JSON.stringify(post))} />
+            <Post
+              key={post._id}
+              hold={true}
+              data={JSON.parse(JSON.stringify(post))}
+            />
           ))}
         </div>
       ) : (

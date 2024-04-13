@@ -3,15 +3,33 @@ import React, { useEffect, useState } from "react";
 // import Timeline from "../../../../components/modules/timeline";
 import ProfileTopBottoms from "../../../../components/modules/profileTopBottoms";
 import Link from "next/link";
+import Swal from "sweetalert2";
 
 export default function Profile({ params }) {
   const [user, setUser] = useState({});
+  const [flag, setFlag] = useState(false);
 
   useEffect(() => {
     fetch(`/api/users/${params.id}`)
       .then((res) => res.json())
       .then((data) => setUser(data));
   }, []);
+
+  const followHandler = () => {
+    fetch(`/api/followers/${params.id}`, { method: "POST" }).then(res => {
+      if (res.ok) {
+        Swal.fire({
+          position: "top-end",
+          icon: "success",
+          title: "follow successfully",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+      }
+    })
+  };
+
+  const unFollowHandler = () => {};
 
   return (
     <div className="w-full p-[3rem] flex flex-col gap-y-5 pb-[10rem]">
@@ -66,9 +84,21 @@ export default function Profile({ params }) {
         >
           Message
         </Link>
-        <div className="rounded-[30px] flex items-center justify-center w-[11.2rem] h-[100%] bg-[#fff] font-bold text-[16px] text-[#606a81]">
-          + Follow
-        </div>
+        {flag ? (
+          <div
+            onClick={unFollowHandler}
+            className="rounded-[30px] flex items-center justify-center w-[11.2rem] h-[100%] bg-[#fff] font-bold text-[16px] text-[#606a81]"
+          >
+            UnFollow
+          </div>
+        ) : (
+          <div
+            onClick={followHandler}
+            className="rounded-[30px] flex items-center justify-center w-[11.2rem] h-[100%] bg-[#fff] font-bold text-[16px] text-[#606a81]"
+          >
+            + Follow
+          </div>
+        )}
       </div>
       {/* <Timeline /> */}
     </div>

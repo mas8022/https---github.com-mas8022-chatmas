@@ -9,7 +9,7 @@ export default async function Explorer() {
     <div className="w-full flex items-center">
       <div className="mx-auto pb-[8rem] grid grid-cols-3">
      {posts.slice(0, 10)?.map((post) => (
-            <Post key={post._id} data={JSON.parse(JSON.stringify(post))} />
+            <Post key={post._id} hold={false} data={JSON.parse(JSON.stringify(post))} />
           ))}
     </div>
     </div>
