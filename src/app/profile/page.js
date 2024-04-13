@@ -6,21 +6,19 @@ import { redirect } from "next/navigation";
 import Me from "../../../utils/me";
 import postModel from "../../../models/post";
 import NoExist from "@/components/modules/noExist";
-import followModel from "@/models/favorite";
+import followModel from "@/models/follow";
+import connectToDb from "@/configs/db";
 
 export default async function Profile() {
+  connectToDb();
   const me = await Me();
-  console.log("me data ==>", me);
   if (!me) {
     contextProfile.setPageMode(false);
     redirect("/");
   }
-  const posts = await postModel.countDocuments({ user: me._id });
-  console.log("posts data ==>", posts);
+  const posts = await postModel.find({ user: me._id });
 
   const followings = await followModel.find({ user: me._id });
-
-  console.log(followings);
 
   return (
     <div className="w-full p-[3rem] flex flex-col gap-y-5 pb-[10rem]">
@@ -34,7 +32,7 @@ export default async function Profile() {
           />
         </Link>
 
-        <div className="h-full flex flex-col justify-center gap-[3px]">
+        <div className="h-[100%] flex flex-col justify-center gap-[3px]">
           <p className="text-[1.8rem] font-semibold text-[#000]">
             {me?.userName}
           </p>
@@ -42,11 +40,11 @@ export default async function Profile() {
         </div>
       </div>
 
-      <div className="w-full h-[8rem] flex items-center justify-evenly">
+      <div className="w-[100%] h-[8rem] flex items-center justify-evenly">
         <Link href={"/posts"}>
           <div className="h-[100%] flex justify-center flex-col gap-1">
             <span className="text-[18px] font-bold">
-              {posts ? posts : 0}
+              {posts.length ? posts.length : 0}
             </span>
             <span className="text-[14px] font-extrabold text-[#606a81]">
               Posts

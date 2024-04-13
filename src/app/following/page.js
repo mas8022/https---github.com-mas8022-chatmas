@@ -1,10 +1,9 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import { following } from "../../../data";
 import ContactBox from "../../../components/modules/contactBox";
 export default function Following() {
   const [search, setSearch] = useState("");
-  const [users, setUsers] = useState([...following]);
+  const [followings, setUsers] = useState([]);
 
   const searchHandler = (e) => {
     setSearch(e.target.value);
@@ -16,6 +15,16 @@ export default function Following() {
     );
     setUsers(filterUser);
   };
+
+  useEffect(() => {
+    fetch("/api/followers/fakeId")
+      .then((res) => res.json())
+      .then((data) => setUsers(data));
+  }, []);
+
+  useEffect(() => {
+    console.log(followings);
+  }, [followings]);
 
   return (
     <div className="w-full p-[3rem] pb-[10rem]">
@@ -35,8 +44,10 @@ export default function Following() {
       </div>
 
       <div className="w-full flex flex-col gap-5">
-        {users
-          ? users.map((user, index) => <ContactBox {...user} key={index} />)
+        {followings
+          ? followings.map((following) => (
+              <ContactBox {...following.following} key={following._id} />
+            ))
           : null}
       </div>
     </div>
