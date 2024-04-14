@@ -3,28 +3,32 @@ import React, { useEffect, useState } from "react";
 import ContactBox from "../../../components/modules/contactBox";
 export default function Following() {
   const [search, setSearch] = useState("");
-  const [followings, setUsers] = useState([]);
+  const [followings, setFollowings] = useState([]);
+  const [showFollowings, setShowFollowings] = useState(followings);
 
   const searchHandler = (e) => {
     setSearch(e.target.value);
-    const filterUser = following.filter((user) =>
-      user.userName
+    const filterUser = followings.filter((user) =>
+      user.following.userName
         .trim()
         .toLocaleLowerCase()
         .includes(search.trim().toLocaleLowerCase())
     );
-    setUsers(filterUser);
+    setShowFollowings(filterUser);
   };
 
   useEffect(() => {
     fetch("/api/followers/fakeId")
       .then((res) => res.json())
-      .then((data) => setUsers(data));
+      .then((data) => {
+        setFollowings(data);
+      });
   }, []);
 
   useEffect(() => {
-    console.log(followings);
+    setShowFollowings(followings);
   }, [followings]);
+
 
   return (
     <div className="w-full p-[3rem] pb-[10rem]">
@@ -44,8 +48,8 @@ export default function Following() {
       </div>
 
       <div className="w-full flex flex-col gap-5">
-        {followings
-          ? followings.map((following) => (
+        {showFollowings
+          ? showFollowings.map((following) => (
               <ContactBox {...following.following} key={following._id} />
             ))
           : null}
