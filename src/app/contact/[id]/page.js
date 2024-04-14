@@ -4,8 +4,9 @@ import React, { useEffect, useState } from "react";
 import ProfileTopBottoms from "../../../../components/modules/profileTopBottoms";
 import Link from "next/link";
 import Swal from "sweetalert2";
-
+import { useRouter } from "next/navigation";
 export default function Profile({ params }) {
+  const router = useRouter();
   const [user, setUser] = useState({});
   const [flag, setFlag] = useState(false);
 
@@ -13,23 +14,47 @@ export default function Profile({ params }) {
     fetch(`/api/users/${params.id}`)
       .then((res) => res.json())
       .then((data) => setUser(data));
+
+    fetch(`/api/isFollow/${params.id}`)
+      .then((res) => res.json())
+      .then((data) => setFlag(data));
   }, []);
 
-  const followHandler = () => {
-    fetch(`/api/followers/${params.id}`, { method: "POST" }).then(res => {
-      if (res.ok) {
-        Swal.fire({
-          position: "top-end",
-          icon: "success",
-          title: "follow successfully",
-          showConfirmButton: false,
-          timer: 1500,
-        });
+  const followHandler = async () => {
+    await fetch(`/api/followers/${params.id}`, { method: "POST" }).then(
+      (res) => {
+        if (res.ok) {
+          setFlag(true);
+          router.refresh();
+          Swal.fire({
+            position: "top-end",
+            icon: "success",
+            title: "follow successfully",
+            showConfirmButton: false,
+            timer: 1500,
+          });
+        }
       }
-    })
+    );
   };
 
-  const unFollowHandler = () => {};
+  const unFollowHandler = async () => {
+    await fetch(`/api/unFollow/${params.id}`, { method: "POST" }).then(
+      (res) => {
+        if (res.ok) {
+          setFlag(false);
+          router.refresh();
+          Swal.fire({
+            position: "top-end",
+            icon: "success",
+            title: "UnFollow successfully",
+            showConfirmButton: false,
+            timer: 1500,
+          });
+        }
+      }
+    );
+  };
 
   return (
     <div className="w-full p-[3rem] flex flex-col gap-y-5 pb-[10rem]">

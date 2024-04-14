@@ -20,6 +20,8 @@ export default async function Profile() {
 
   const followings = await followModel.find({ user: me._id });
 
+  const followers = await followModel.find({ following: me._id });
+
   return (
     <div className="w-full p-[3rem] flex flex-col gap-y-5 pb-[10rem]">
       <ProfileTopBottoms />
@@ -56,7 +58,9 @@ export default async function Profile() {
 
         <Link href={"/followers"}>
           <div className="h-[100%] flex justify-center flex-col gap-3">
-            <span className="text-[18px] font-bold">412</span>
+            <span className="text-[18px] font-bold">
+              {followers && followers.length ? followers.length : 0}
+            </span>
             <span className="text-[14px] font-extrabold text-[#606a81]">
               Followers
             </span>
