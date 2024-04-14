@@ -29,7 +29,6 @@ export default function Profile({ params }) {
     fetch(`/api/userFollowings/${params.id}`)
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
         setFollowings(data);
       });
 

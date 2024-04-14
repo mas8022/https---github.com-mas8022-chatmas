@@ -25,7 +25,6 @@ export default function Following({ params }) {
   }, []);
 
   useEffect(() => {
-    console.log(followings);
     setShowFollowings(followings);
   }, [followings]);
 

@@ -1,22 +1,24 @@
 "use client";
 import React, { useState } from "react";
-
-export default function MessageBox({ to, from }) {
+import { useRouter } from "next/navigation";
+export default function MessageBox({ toId }) {
+  const router = useRouter();
   const [text, setText] = useState("");
 
   const sendMessageHandler = async () => {
     if (text.trim()) {
-      await fetch("/api/messageStart", {
+      await fetch("/api/message", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          from,
-          to,
-          text,
+          to: toId,
+          content: text,
         }),
-      })
+      });
+      setText("");
+      router.refresh();
     }
   };
 

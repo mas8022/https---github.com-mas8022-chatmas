@@ -2,22 +2,45 @@ import React from "react";
 import Text from "../../../../components/modules/text";
 import MessageBox from "../../../../components/templates/messageBox";
 import userModel from "@/models/users";
+import chatModel from "@/models/chat";
 import Me from "@/utils/me";
 
 export default async function Message({ params }) {
+  const me = await Me();
   const user = await userModel.findOne(
     { _id: params.id },
     "_id userName profileImage"
   );
-  const userData = await Me();
-  const from = userData._id;
+
+  const messageArray = await chatModel
+    .findOne(
+      {
+        $or: [
+          { from: me._id, to: params.id },
+          { from: params.id, to: me._id },
+        ],
+      },
+      "messages"
+    )
+    .populate("messages");
+
+  const allMessage = messageArray.messages;
+  const meMessage = allMessage.filter(
+    (item) => String(item.user) === String(me._id)
+  );
+  const youMessage = allMessage.filter(
+    (item) => String(item.user) !== String(me._id)
+  );
+
 
   return (
     <div className="w-full h-full flex items-center flex-col">
       <div className="w-full h-[10rem] flex items-center gap-5 px-11">
         <img
           className="rounded-[50%] w-[7rem] h-[7rem]"
-          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQzvcxSjwABvomYZsgSIsYinTKxioBwSJKi5ojOY-aRyQ&s"
+          src={
+            user && user.profileImage ? user.profileImage : "/images/images.jpg"
+          }
           alt="profile image"
         />
         <div className="w-full h-full flex flex-col gap-3 justify-center">
@@ -28,21 +51,21 @@ export default async function Message({ params }) {
         </div>
       </div>
 
-      <div className="w-full h-1 bg-gradient-to-r from-[#e5ffe3] to-slate-50 mb-12"></div>
-      <div className="w-full flex flex-col gap-10 px-12">
-        <Text
-          text={
-            "hello frgtsrgdf dfsgdfsgf dsfgdfg dfgfsdgsfdg fgsdfsd fsd dsf hossein khobi"
-          }
-        />
-        <Text text={"hello hossein khobi"} />
-        <Text text={"hello hossein efrsadfsdf khobi"} />
+      <div className="w-full h-1 bg-gradient-to-r from-[#e5ffe3] to-slate-50 "></div>
+      <div className="w-full h-[53rem] py-10 flex flex-col gap-10 px-12 overflow-y-scroll">
+        {allMessage && allMessage.length
+          ? allMessage.map((item) => {
+              if (String(item.user) === String(me._id)) {
+                return <Text subject={"me"} text={item.content} />;
+              }
+              return (
+                <Text subject={"you"} text={item.content} />
+              );
+            })
+          : null}
       </div>
 
-      <MessageBox
-        to={JSON.parse(JSON.stringify(user._id))}
-        from={JSON.parse(JSON.stringify(from))}
-      />
+      <MessageBox toId={params.id} />
     </div>
   );
 }
