@@ -6,7 +6,7 @@ import Link from "next/link";
 import Bg from "../modules/bg";
 import { useRouter } from "next/navigation";
 
-export default function Navbar() {
+export default function Navbar({ userId }) {
   const router = useRouter();
   const [flagSide, setFlagSide] = useState(false);
 
@@ -29,7 +29,6 @@ export default function Navbar() {
       text: "Are you sure to log out the site ?",
       buttons: true,
     }).then(async (res) => {
-
       if (res) {
         await fetch("/api/logout", { method: "POST" });
         router.refresh();
@@ -62,7 +61,7 @@ export default function Navbar() {
 
       <div className={flagSide ? "sideActive" : "sideDeActive"}>
         <div className="w-full flex flex-col gap-5">
-          <Link href={"/posts"}>
+          <Link href={`/posts/${userId}`}>
             <div className="sideItemDeActive active:sideItemActive ">
               <svg
                 xmlns="http://www.w3.org/2000/svg"

@@ -21,7 +21,7 @@ export default async function Home() {
     <>
       <Welcome Active={Active} />
       <div className={style.home}>
-        <Navbar />
+        <Navbar userId={user._id}/>
         <Search />
         {/* <StoreList /> */}
         <div className="w-full flex flex-col gap-8 pb-[12rem]">

@@ -6,8 +6,10 @@ import Button from "@mui/material/Button";
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import Navbar from "../../../components/templates/navbar";
 import Swal from "sweetalert2";
+import { useRouter } from "next/navigation";
 
 export default function PostUpload() {
+  const route = useRouter()
   const [cover, setCover] = useState('');
 
   const formik = useFormik({
@@ -39,6 +41,7 @@ export default function PostUpload() {
           });
           setCover("");
           values.content = "";
+          route.refresh()
         }
       });
       setTimeout(() => {

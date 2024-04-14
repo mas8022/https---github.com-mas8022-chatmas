@@ -9,6 +9,9 @@ export default function Profile({ params }) {
   const router = useRouter();
   const [user, setUser] = useState({});
   const [flag, setFlag] = useState(false);
+  const [posts, setPosts] = useState([]);
+  const [followings, setFollowings] = useState([]);
+  const [followers, setFollowers] = useState([]);
 
   useEffect(() => {
     fetch(`/api/users/${params.id}`)
@@ -18,6 +21,21 @@ export default function Profile({ params }) {
     fetch(`/api/isFollow/${params.id}`)
       .then((res) => res.json())
       .then((data) => setFlag(data));
+
+    fetch(`/api/post/getUserPost/${params.id}`)
+      .then((res) => res.json())
+      .then((data) => setPosts(data));
+
+    fetch(`/api/userFollowings/${params.id}`)
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        setFollowings(data);
+      });
+
+    fetch(`/api/userFollowers/${params.id}`)
+      .then((res) => res.json())
+      .then((data) => setFollowers(data));
   }, []);
 
   const followHandler = async () => {
@@ -25,7 +43,6 @@ export default function Profile({ params }) {
       (res) => {
         if (res.ok) {
           setFlag(true);
-          router.refresh();
           Swal.fire({
             position: "top-end",
             icon: "success",
@@ -36,6 +53,7 @@ export default function Profile({ params }) {
         }
       }
     );
+    router.refresh();
   };
 
   const unFollowHandler = async () => {
@@ -43,7 +61,6 @@ export default function Profile({ params }) {
       (res) => {
         if (res.ok) {
           setFlag(false);
-          router.refresh();
           Swal.fire({
             position: "top-end",
             icon: "success",
@@ -54,6 +71,7 @@ export default function Profile({ params }) {
         }
       }
     );
+    router.refresh();
   };
 
   return (
@@ -76,26 +94,38 @@ export default function Profile({ params }) {
       </div>
 
       <div className="w-[100%] h-[8rem] flex items-center justify-evenly">
-        <div className="h-[100%] flex justify-center flex-col gap-1">
-          <span className="text-[18px] font-bold">1051</span>
-          <span className="text-[14px] font-extrabold text-[#606a81]">
-            Posts
-          </span>
-        </div>
+        <Link href={`/posts/${params.id}`}>
+          <div className="h-[100%] flex justify-center flex-col gap-1">
+            <span className="text-[18px] font-bold">
+              {posts && posts.length ? posts.length : 0}
+            </span>
+            <span className="text-[14px] font-extrabold text-[#606a81]">
+              Posts
+            </span>
+          </div>
+        </Link>
         <div className="w-[2px] h-[40%] bg-[#e8e8ea]"></div>
-        <div className="h-[100%] flex justify-center flex-col gap-3">
-          <span className="text-[18px] font-bold">412</span>
-          <span className="text-[14px] font-extrabold text-[#606a81]">
-            Followers
-          </span>
-        </div>
+        <Link href={`/followers/${params.id}`}>
+          <div className="h-[100%] flex justify-center flex-col gap-3">
+            <span className="text-[18px] font-bold">
+              {followers && followers.length ? followers.length : 0}
+            </span>
+            <span className="text-[14px] font-extrabold text-[#606a81]">
+              Followers
+            </span>
+          </div>
+        </Link>
         <div className="w-[2px] h-[40%] bg-[#e8e8ea]"></div>
-        <div className="h-[100%] flex justify-center flex-col gap-3">
-          <span className="text-[18px] font-bold">310</span>
-          <span className="text-[14px] font-extrabold text-[#606a81]">
-            Following
-          </span>
-        </div>
+        <Link href={`/following/${params.id}`}>
+          <div className="h-[100%] flex justify-center flex-col gap-3">
+            <span className="text-[18px] font-bold">
+              {followings && followings.length ? followings.length : 0}
+            </span>
+            <span className="text-[14px] font-extrabold text-[#606a81]">
+              Following
+            </span>
+          </div>
+        </Link>
       </div>
 
       <div className="flex items-center justify-between w-[100%] h-[5rem] gap-[2rem] mb-12">

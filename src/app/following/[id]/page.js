@@ -1,7 +1,8 @@
 "use client";
+import ContactBox from "@/components/modules/contactBox";
 import React, { useEffect, useState } from "react";
-import ContactBox from "../../../components/modules/contactBox";
-export default function Following() {
+
+export default function Following({ params }) {
   const [search, setSearch] = useState("");
   const [followings, setFollowings] = useState([]);
   const [showFollowings, setShowFollowings] = useState(followings);
@@ -18,17 +19,15 @@ export default function Following() {
   };
 
   useEffect(() => {
-    fetch("/api/followers/fakeId")
+    fetch(`/api/userFollowings/${params.id}`)
       .then((res) => res.json())
-      .then((data) => {
-        setFollowings(data);
-      });
+      .then((data) => setFollowings(data));
   }, []);
 
   useEffect(() => {
+    console.log(followings);
     setShowFollowings(followings);
   }, [followings]);
-
 
   return (
     <div className="w-full p-[3rem] pb-[10rem]">
@@ -48,7 +47,7 @@ export default function Following() {
       </div>
 
       <div className="w-full flex flex-col gap-5">
-        {showFollowings
+        {showFollowings && showFollowings.length
           ? showFollowings.map((following) => (
               <ContactBox {...following.following} key={following._id} />
             ))

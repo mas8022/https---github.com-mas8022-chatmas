@@ -8,7 +8,7 @@ import postModel from "../../../models/post";
 import NoExist from "@/components/modules/noExist";
 import followModel from "@/models/follow";
 import connectToDb from "@/configs/db";
-
+import { useRouter } from "next/navigation";
 export default async function Profile() {
   connectToDb();
   const me = await Me();
@@ -16,7 +16,7 @@ export default async function Profile() {
     contextProfile.setPageMode(false);
     redirect("/");
   }
-  const posts = await postModel.find({ user: me._id });
+  const posts = await postModel.find({ user: me._id })
 
   const followings = await followModel.find({ user: me._id });
 
@@ -43,7 +43,7 @@ export default async function Profile() {
       </div>
 
       <div className="w-[100%] h-[8rem] flex items-center justify-evenly">
-        <Link href={"/posts"}>
+        <Link href={`/posts/${me._id}`}>
           <div className="h-[100%] flex justify-center flex-col gap-1">
             <span className="text-[18px] font-bold">
               {posts.length ? posts.length : 0}
@@ -56,7 +56,7 @@ export default async function Profile() {
 
         <div className="w-[2px] h-[40%] bg-[#e8e8ea]"></div>
 
-        <Link href={"/followers"}>
+        <Link href={`/followers/${me._id}`}>
           <div className="h-[100%] flex justify-center flex-col gap-3">
             <span className="text-[18px] font-bold">
               {followers && followers.length ? followers.length : 0}
@@ -69,7 +69,7 @@ export default async function Profile() {
 
         <div className="w-[2px] h-[40%] bg-[#e8e8ea]"></div>
 
-        <Link href={"/following"}>
+        <Link href={`/following/${me._id}`}>
           <div className="h-[100%] flex justify-center flex-col gap-3">
             <span className="text-[18px] font-bold">
               {followings && followings.length ? followings.length : 0}

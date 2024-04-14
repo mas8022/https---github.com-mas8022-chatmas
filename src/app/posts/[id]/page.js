@@ -1,14 +1,12 @@
 import React from "react";
-import Timeline from "../../../components/modules/timeline";
-import Me from "../../../utils/me";
-import { getUserPosts } from "@/utils/postTools";
-import NoExist from "@/components/modules/noExist";
-import postModel from "@/models/post";
 
-export default async function Post() {
-  const user = await Me();
+import postModel from "@/models/post";
+import Timeline from "@/components/modules/timeline";
+import NoExist from "@/components/modules/noExist";
+
+export default async function Post({params}) {
   const posts = await postModel
-    .find({ user: user._id })
+    .find({ user: params.id })
     .populate("user", "profileImage userName");
 
   return (

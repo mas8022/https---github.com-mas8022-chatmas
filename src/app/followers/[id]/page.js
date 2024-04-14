@@ -1,7 +1,8 @@
 "use client";
+import ContactBox from "@/components/modules/contactBox";
 import React, { useEffect, useState } from "react";
-import ContactBox from "../../../components/modules/contactBox";
-export default function Followers() {
+
+export default function Followers({params}) {
   const [search, setSearch] = useState("");
   const [followers, setFollowers] = useState([]);
   const [showFollowers, setShowFollowers] = useState(followers);
@@ -18,7 +19,7 @@ export default function Followers() {
   };
 
   useEffect(() => {
-    fetch("/api/followings/fakeId")
+    fetch(`/api/userFollowers/${params.id}`)
       .then((res) => res.json())
       .then((data) => {
         setFollowers(data);
