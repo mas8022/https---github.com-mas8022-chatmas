@@ -8,12 +8,11 @@ import postModel from "../../../models/post";
 import NoExist from "@/components/modules/noExist";
 import followModel from "@/models/follow";
 import connectToDb from "@/configs/db";
-import { useRouter } from "next/navigation";
+
 export default async function Profile() {
   connectToDb();
   const me = await Me();
   if (!me) {
-    contextProfile.setPageMode(false);
     redirect("/");
   }
   const posts = (await postModel.find({ user: me._id })).reverse();

@@ -8,6 +8,7 @@ import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 const emailRegex = /[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}/;
 import context from "../../utils/context";
 import { useRouter } from "next/navigation";
+
 export default function Welcome({ Active }) {
   const contextWelcome = useContext(context);
   const router = useRouter();
@@ -15,8 +16,8 @@ export default function Welcome({ Active }) {
   const [flagModal, setFlagModal] = useState(false);
   const [flagLoginModal, setFlagLoginModal] = useState(false);
 
-
   useEffect(() => {
+  
     const unHideModalSignUpHandler = (e) => {
       if (
         e.target.contains(
@@ -35,7 +36,6 @@ export default function Welcome({ Active }) {
 
   const changePageModeHandler = async () => {
     if (flagLog) {
-      contextWelcome.setPageMode(true);
       setFlagModal(false);
     } else {
       setFlagModal(true);
@@ -88,7 +88,6 @@ export default function Welcome({ Active }) {
       });
 
       setFlagModal(false);
-      contextWelcome.setPageMode(true);
 
       setTimeout(() => {
         setSubmitting(false);
@@ -125,7 +124,6 @@ export default function Welcome({ Active }) {
       });
 
       setFlagModal(false);
-      contextWelcome.setPageMode(true);
 
       setTimeout(() => {
         setSubmitting(false);
@@ -145,11 +143,7 @@ export default function Welcome({ Active }) {
   };
 
   return (
-    <div
-      className={
-        contextWelcome.pageMode && Active ? "welcomeDeActive" : undefined
-      }
-    >
+    <div className={Active ? "welcomeDeActive" : undefined}>
       <div
         className={
           flagModal || flagLoginModal ? style.start__momModal : undefined
