@@ -1,5 +1,6 @@
 "use client";
 import ContactBox from "@/components/modules/contactBox";
+import Image from "next/image";
 import React, { useEffect, useState } from "react";
 
 export default function Followers({ params }) {
@@ -39,7 +40,7 @@ export default function Followers({ params }) {
   return (
     <div className="w-full p-[3rem] pb-[10rem]">
       <div className="w-full h-[4rem] rounded-full border border-1 border-black/20 flex pl-5 items-center gap-3 mb-20">
-        <img
+        <Image
           className="w-[2.5rem] h-[2.5rem]"
           src="/images/search.svg"
           alt="search button"

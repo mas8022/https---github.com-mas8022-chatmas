@@ -5,6 +5,7 @@ import swal from "sweetalert";
 import Link from "next/link";
 import Bg from "../modules/bg";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 
 export default function Navbar({ userId }) {
   const router = useRouter();
@@ -39,14 +40,14 @@ export default function Navbar({ userId }) {
   return (
     <>
       <div className={style.navbar}>
-        <img
+        <Image
           onClick={() => setFlagSide(true)}
           className={style.navSvg}
           src="/images/list.svg"
           alt="list button"
         />
         <div className={style.sfgf}>Maschat</div>
-        <img
+        <Image
           onClick={() =>
             swal({
               icon: "info",
@@ -205,7 +206,7 @@ export default function Navbar({ userId }) {
         </div>
         <div className="w-full h-[7rem] flex items-center justify-between pt-[1rem] border-t-2 pl-5">
           <h1 className="font-bold text-[1.5rem]">MasChat</h1>
-          <img
+          <Image
             className="w-[4rem] h-[4rem]"
             src="/images/logo.png"
             alt="logo"

@@ -8,6 +8,7 @@ import postModel from "../../../models/post";
 import NoExist from "@/components/modules/noExist";
 import followModel from "@/models/follow";
 import connectToDb from "@/configs/db";
+import Image from "next/image";
 
 export default async function Profile() {
   connectToDb();
@@ -27,7 +28,7 @@ export default async function Profile() {
 
       <div className="h-[10.5rem] w-[100%] flex items-center gap-6">
         <Link href={`/profiler/${me._id}`}>
-          <img
+          <Image
             src={me?.profileImage ? me.profileImage : "/images/images.jpg"}
             className="w-[8.8rem] h-[8.8rem] rounded-[100%] bg-black relative !bg-cover !bg-no-repeat !bg-center"
           />

@@ -2,13 +2,14 @@ import React from "react";
 import style from "../../src/app/styles/timeline.module.css";
 import Link from "next/link";
 import MoreTimeLine from "./moreTimeLine";
+import Image from "next/image";
 
 export default function Timeline({ post }) {
   return (
     <div className={style.timeline}>
       <div className={style.timeline__top}>
         <Link href={`/contact/${post.user._id}`} className={style.timeline__top__right}>
-          <img
+          <Image
             src={
               post.user.profileImage
                 ? post.user.profileImage
@@ -28,7 +29,7 @@ export default function Timeline({ post }) {
       </div>
 
       <Link href={`/show-post/${post._id}`}>
-        <img
+        <Image
           src={post.postImage}
           className={style.timeline__bottom}
           alt="post image"

@@ -2,6 +2,7 @@ import React from "react";
 import userModel from "../../../../models/users";
 import connectToDb from "../../../../configs/db";
 import EditForm from "../../../../components/templates/editForm";
+import Image from "next/image";
 
 export default async function Profiler({ params }) {
   connectToDb();
@@ -10,7 +11,7 @@ export default async function Profiler({ params }) {
   return (
     <div className="w-full h-screen flex flex-col items-center justify-between p-[3rem] pb-[17rem]">
       <div className="flex flex-col items-center gap-3 mb-10">
-        <img
+        <Image
           src={user.profileImage ? user.profileImage : "/images/images.jpg"}
           alt="profile image"
           className="w-[20rem] h-[20rem] rounded-full bg-cover bg-center bg-no-repeat"

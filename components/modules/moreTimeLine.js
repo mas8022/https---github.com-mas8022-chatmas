@@ -2,6 +2,7 @@
 import React from "react";
 import swal from "sweetalert";
 import Like from "./like";
+import Image from "next/image";
 
 export default function MoreTimeLine({ post }) {
 
@@ -26,7 +27,7 @@ export default function MoreTimeLine({ post }) {
 
   return (
     <div className="w-[10rem] h-[5rem] flex items-center justify-between gap-2 z-[1000]">
-      <img
+      <Image
         onClick={commentHandler}
         className="w-[3rem] h-[3rem] active:scale-95 transition-all duration-75"
         src="/images/comments.svg"

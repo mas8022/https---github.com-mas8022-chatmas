@@ -4,11 +4,11 @@ import Like from "../../../../components/modules/like";
 import connectToDb from "@/configs/db";
 import postModel from "@/models/post";
 import commentModel from "@/models/comment";
+import Image from "next/image";
 
 export default async function ShowPost({ params }) {
   connectToDb();
   const post = await postModel.findOne({ _id: params.id });
-
 
   const comments = await commentModel
     .find({ post: params.id }, "-post -__v")
@@ -16,7 +16,7 @@ export default async function ShowPost({ params }) {
 
   return (
     <div className="w-full flex flex-col gap-10 p-12 pb-[12rem]">
-      <img
+      <Image
         className="w-full h-[30rem] shadow-md"
         src={post.postImage ? post.postImage : "/images/noexist.svg"}
         alt="post image"
@@ -27,7 +27,12 @@ export default async function ShowPost({ params }) {
       </div>
       <div className="w-full flex flex-col gap-6">
         {comments && comments.length
-          ? comments.map((comment) => <Comment comment={JSON.parse(JSON.stringify(comment))} key={comment._id} />)
+          ? comments.map((comment) => (
+              <Comment
+                comment={JSON.parse(JSON.stringify(comment))}
+                key={comment._id}
+              />
+            ))
           : null}
       </div>
     </div>

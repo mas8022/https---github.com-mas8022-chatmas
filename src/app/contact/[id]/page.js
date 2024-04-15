@@ -7,6 +7,7 @@ import Swal from "sweetalert2";
 import { useRouter } from "next/navigation";
 import NoExist from "@/components/modules/noExist";
 import Post from "@/components/modules/post";
+import Image from "next/image";
 export default function Profile({ params }) {
   const router = useRouter();
   const [user, setUser] = useState({});
@@ -80,7 +81,7 @@ export default function Profile({ params }) {
       <ProfileTopBottoms />
 
       <div className="h-[10.5rem] w-[100%] flex items-center gap-6">
-        <img
+        <Image
           src={user.profileImage ? user.profileImage : "/images/images.jpg"}
           alt="user image"
           className="w-[8.8rem] h-[8.8rem] rounded-[100%] relative"

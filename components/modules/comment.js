@@ -3,6 +3,7 @@ import Link from "next/link";
 import React from "react";
 import { useRouter } from "next/navigation";
 import Swal from "sweetalert2";
+import Image from "next/image";
 export default function Comment({ comment }) {
   const router = useRouter();
 
@@ -35,7 +36,7 @@ export default function Comment({ comment }) {
         className="w-full flex gap-6 items-center"
         href={`/contact/${"54rew"}`}
       >
-        <img
+        <Image
           src={comment.commenter.profileImage}
           alt="commenter image"
           className="w-[6rem] h-[6rem] rounded-full"

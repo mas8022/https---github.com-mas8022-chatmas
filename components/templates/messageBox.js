@@ -1,6 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 export default function MessageBox({ toId }) {
   const router = useRouter();
   const [text, setText] = useState("");
@@ -31,7 +32,7 @@ export default function MessageBox({ toId }) {
         placeholder="type message ..."
         className="w-full h-full rounded-full px-6 font-medium text-[1.6rem] bg-slate-50/0 focus:outline-none"
       />
-      <img
+      <Image
         onClick={sendMessageHandler}
         src="/images/send.svg"
         alt="send"

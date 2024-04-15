@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from "react";
 import style from "../../src/app/styles/search.module.css";
 import Link from "next/link";
+import Image from "next/image";
 
 export default function Search() {
   const [search, setSearch] = useState("");
@@ -27,7 +28,7 @@ export default function Search() {
   return (
     <>
       <div className={style.search}>
-        <img
+        <Image
           className={style.searchIcon}
           src="/images/search.svg"
           alt="search button"
@@ -46,7 +47,7 @@ export default function Search() {
           ? usersList.map((user) => (
               <Link href={`contact/${user._id}`} key={user._id} className="w-full h-24  shadow-xl px-6 flex items-center justify-between">
                 <div className="flex items-center gap-6">
-                  <img
+                  <Image
                     className="w-14 h-14 rounded-full"
                     src={user.profileImage?user.profileImage:"/images/blank-profile-picture-973460_640.png"}
                     alt="user image"
