@@ -25,14 +25,14 @@ export default function MoreTimeLine({ post }) {
   };
 
   return (
-    <div className="w-[7rem] h-[5rem] flex items-center justify-between z-[1000]">
+    <div className="w-[10rem] h-[5rem] flex items-center justify-between gap-2 z-[1000]">
       <img
         onClick={commentHandler}
         className="w-[3rem] h-[3rem] active:scale-95 transition-all duration-75"
         src="/images/comments.svg"
         alt="comment button"
       />
-      <Like postId={post._id} />
+      <Like postId={post._id} likes={post.likes} />
     </div>
   );
 }

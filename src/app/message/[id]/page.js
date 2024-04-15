@@ -24,14 +24,7 @@ export default async function Message({ params }) {
     )
     .populate("messages");
 
-  const allMessage = messageArray.messages;
-  const meMessage = allMessage.filter(
-    (item) => String(item.user) === String(me._id)
-  );
-  const youMessage = allMessage.filter(
-    (item) => String(item.user) !== String(me._id)
-  );
-
+  const allMessage = await messageArray?.messages;
 
   return (
     <div className="w-full h-full flex items-center flex-col">
@@ -56,10 +49,12 @@ export default async function Message({ params }) {
         {allMessage && allMessage.length
           ? allMessage.map((item) => {
               if (String(item.user) === String(me._id)) {
-                return <Text subject={"me"} text={item.content} />;
+                return (
+                  <Text subject={"me"} text={item.content} key={item._id} />
+                );
               }
               return (
-                <Text subject={"you"} text={item.content} />
+                <Text subject={"you"} text={item.content} key={item._id} />
               );
             })
           : null}

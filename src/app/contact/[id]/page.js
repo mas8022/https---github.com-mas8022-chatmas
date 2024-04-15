@@ -5,6 +5,8 @@ import ProfileTopBottoms from "../../../../components/modules/profileTopBottoms"
 import Link from "next/link";
 import Swal from "sweetalert2";
 import { useRouter } from "next/navigation";
+import NoExist from "@/components/modules/noExist";
+import Post from "@/components/modules/post";
 export default function Profile({ params }) {
   const router = useRouter();
   const [user, setUser] = useState({});
@@ -141,7 +143,7 @@ export default function Profile({ params }) {
         {flag ? (
           <div
             onClick={unFollowHandler}
-            className="rounded-[30px] flex items-center justify-center w-[11.2rem] h-[100%] bg-[#fff] font-bold text-[16px] text-[#606a81]"
+            className="bg-gradient-to-r from-[#cffa7c] to-[#9ce89d] rounded-[30px] flex items-center justify-center w-[11.2rem] h-[100%]  font-bold text-[16px]"
           >
             UnFollow
           </div>
@@ -154,7 +156,19 @@ export default function Profile({ params }) {
           </div>
         )}
       </div>
-      {/* <Timeline /> */}
+      {posts && posts.length ? (
+        <div className="w-full grid grid-cols-3 gap-2 gap-y-5">
+          {posts.reverse().map((post) => (
+            <Post
+              key={post._id}
+              hold={true}
+              data={JSON.parse(JSON.stringify(post))}
+            />
+          ))}
+        </div>
+      ) : (
+        <NoExist upload={false} />
+      )}
     </div>
   );
 }

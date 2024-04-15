@@ -2,7 +2,6 @@ import React from "react";
 import style from "../app/styles/home.module.css";
 import Navbar from "../../components/templates/navbar";
 import Search from "../../components/modules/search";
-import StoreList from "../../components/templates/storeList";
 import Timeline from "../../components/modules/timeline";
 import Welcome from "../../components/templates/welcome";
 import Me from "../../utils/me";
@@ -26,7 +25,7 @@ export default async function Home() {
         {/* <StoreList /> */}
         <div className="w-full flex flex-col gap-8 pb-[12rem]">
           {posts && posts.length
-            ? posts.slice(0,3).map((post) => <Timeline post={post} />)
+            ? posts.slice(0,10).map((post) => <Timeline post={post} />)
             : null}
         </div>
       </div>

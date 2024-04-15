@@ -2,20 +2,26 @@
 import ContactBox from "@/components/modules/contactBox";
 import React, { useEffect, useState } from "react";
 
-export default function Followers({params}) {
+export default function Followers({ params }) {
   const [search, setSearch] = useState("");
   const [followers, setFollowers] = useState([]);
   const [showFollowers, setShowFollowers] = useState(followers);
 
   const searchHandler = (e) => {
+    if (search) {
+      setShowFollowers(followers);
+    }
     setSearch(e.target.value);
     const filterUser = followers.filter((user) =>
       user.following.userName
-        .trim()
+        ?.trim()
         .toLocaleLowerCase()
         .includes(search.trim().toLocaleLowerCase())
     );
     setShowFollowers(filterUser);
+    if (search) {
+      setShowFollowers(followers);
+    }
   };
 
   useEffect(() => {
@@ -48,7 +54,7 @@ export default function Followers({params}) {
       </div>
 
       <div className="w-full flex flex-col gap-5">
-        {showFollowers
+        {showFollowers && showFollowers.length
           ? showFollowers.map((follower) => (
               <ContactBox {...follower.user} key={follower._id} />
             ))

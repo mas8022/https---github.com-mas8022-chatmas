@@ -16,7 +16,7 @@ export default async function Profile() {
     contextProfile.setPageMode(false);
     redirect("/");
   }
-  const posts = await postModel.find({ user: me._id })
+  const posts = (await postModel.find({ user: me._id })).reverse();
 
   const followings = await followModel.find({ user: me._id });
 
