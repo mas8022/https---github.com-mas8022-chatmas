@@ -16,7 +16,7 @@ export default async function ShowPost({ params }) {
 
   return (
     <div className="w-full flex flex-col gap-10 p-12 pb-[12rem]">
-      <Image
+      <img
         className="w-full h-[30rem] shadow-md"
         src={post.postImage ? post.postImage : "/images/noexist.svg"}
         alt="post image"

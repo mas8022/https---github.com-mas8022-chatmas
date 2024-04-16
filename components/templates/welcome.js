@@ -1,23 +1,20 @@
 "use client";
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { styled } from "@mui/material/styles";
 import { useFormik } from "formik";
 import style from "../../src/app/styles/home.module.css";
 import Button from "@mui/material/Button";
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 const emailRegex = /[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}/;
-import context from "../../utils/context";
 import { useRouter } from "next/navigation";
 
 export default function Welcome({ Active }) {
-  const contextWelcome = useContext(context);
   const router = useRouter();
   const [flagLog, setFlagLog] = useState(false);
   const [flagModal, setFlagModal] = useState(false);
   const [flagLoginModal, setFlagLoginModal] = useState(false);
 
   useEffect(() => {
-  
     const unHideModalSignUpHandler = (e) => {
       if (
         e.target.contains(
@@ -194,9 +191,8 @@ export default function Welcome({ Active }) {
             />
             {signUp.touched.phone && signUp.errors.phone && signUp.errors.phone}
 
-            <div className={style.ikenv}>
               <Button
-                className={style.lkgnsd}
+                style={{ display: "none" }}
                 component="label"
                 variant="contained"
                 startIcon={<CloudUploadIcon />}
@@ -211,10 +207,9 @@ export default function Welcome({ Active }) {
                   }
                 />
               </Button>
-              <button className={style.signUpBtn} type="submit">
-                sign up
-              </button>
-            </div>
+                <button className={style.signUpBtn} type="submit">
+                  sign up
+                </button>
           </form>
         ) : undefined}
         {flagLoginModal ? (

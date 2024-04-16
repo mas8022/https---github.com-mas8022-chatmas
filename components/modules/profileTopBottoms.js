@@ -7,7 +7,7 @@ export default function ProfileTopBottoms() {
 
   return (
     <div className="w-[100%] h-[4rem] flex items-center justify-between">
-      <Image onClick={() => router.back()} src="/images/arrow-left.svg" alt="back" />
+      <img onClick={() => router.back()} src="/images/arrow-left.svg" alt="back" />
       <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"

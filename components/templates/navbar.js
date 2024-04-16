@@ -40,14 +40,14 @@ export default function Navbar({ userId }) {
   return (
     <>
       <div className={style.navbar}>
-        <Image
+        <img
           onClick={() => setFlagSide(true)}
           className={style.navSvg}
           src="/images/list.svg"
           alt="list button"
         />
         <div className={style.sfgf}>Maschat</div>
-        <Image
+        <img
           onClick={() =>
             swal({
               icon: "info",
@@ -206,7 +206,7 @@ export default function Navbar({ userId }) {
         </div>
         <div className="w-full h-[7rem] flex items-center justify-between pt-[1rem] border-t-2 pl-5">
           <h1 className="font-bold text-[1.5rem]">MasChat</h1>
-          <Image
+          <img
             className="w-[4rem] h-[4rem]"
             src="/images/logo.png"
             alt="logo"

@@ -1,7 +1,6 @@
 import "./globals.css";
 import "@fortawesome/fontawesome-svg-core/styles.css";
 import Footer from "../../components/modules/footer";
-import MyContextProvider from "../../utils/contextProvider";
 import Scroller from "../../components/modules/scroller";
 
 export const metadata = {
@@ -12,7 +11,6 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <MyContextProvider>
       <html lang="en">
         <body>
           {children}
@@ -20,6 +18,5 @@ export default function RootLayout({ children }) {
           <Scroller />
         </body>
       </html>
-    </MyContextProvider>
   );
 }

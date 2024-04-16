@@ -28,7 +28,7 @@ export default async function Profile() {
 
       <div className="h-[10.5rem] w-[100%] flex items-center gap-6">
         <Link href={`/profiler/${me._id}`}>
-          <Image
+          <img
             src={me?.profileImage ? me.profileImage : "/images/images.jpg"}
             className="w-[8.8rem] h-[8.8rem] rounded-[100%] bg-black relative !bg-cover !bg-no-repeat !bg-center"
           />

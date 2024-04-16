@@ -9,7 +9,7 @@ export default function Timeline({ post }) {
     <div className={style.timeline}>
       <div className={style.timeline__top}>
         <Link href={`/contact/${post.user._id}`} className={style.timeline__top__right}>
-          <Image
+          <img
             src={
               post.user.profileImage
                 ? post.user.profileImage
@@ -29,7 +29,7 @@ export default function Timeline({ post }) {
       </div>
 
       <Link href={`/show-post/${post._id}`}>
-        <Image
+        <img
           src={post.postImage}
           className={style.timeline__bottom}
           alt="post image"

@@ -36,7 +36,7 @@ export default function Comment({ comment }) {
         className="w-full flex gap-6 items-center"
         href={`/contact/${"54rew"}`}
       >
-        <Image
+        <img
           src={comment.commenter.profileImage}
           alt="commenter image"
           className="w-[6rem] h-[6rem] rounded-full"

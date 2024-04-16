@@ -6,6 +6,7 @@ import { useFormik } from "formik";
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import swal from "sweetalert";
 import { useRouter } from "next/navigation";
+import Swal from "sweetalert2";
 const emailRegex = /[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}/;
 
 export default function EditForm({ user }) {
@@ -55,7 +56,26 @@ export default function EditForm({ user }) {
               "Content-Type": "application/json",
             },
             body: JSON.stringify(values),
-          });
+          }).then(res => {
+            if (res.ok) {
+              Swal.fire({
+                position: "top-end",
+                icon: "success",
+                title: "edit profile successfully",
+                showConfirmButton: false,
+                timer: 1500,
+              });
+            }else{
+              Swal.fire({
+                position: "top-end",
+                icon: "error",
+                title: "check your internet connection",
+                showConfirmButton: false,
+                timer: 1500,
+              });
+            }
+          })
+          
           router.refresh()
           router.refresh()
           router.refresh()

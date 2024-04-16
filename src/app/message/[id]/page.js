@@ -30,7 +30,7 @@ export default async function Message({ params }) {
   return (
     <div className="w-full h-full flex items-center flex-col">
       <div className="w-full h-[10rem] flex items-center gap-5 px-11">
-        <Image
+        <img
           className="rounded-[50%] w-[7rem] h-[7rem]"
           src={
             user && user.profileImage ? user.profileImage : "/images/images.jpg"

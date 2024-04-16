@@ -32,7 +32,7 @@ export default function MessageBox({ toId }) {
         placeholder="type message ..."
         className="w-full h-full rounded-full px-6 font-medium text-[1.6rem] bg-slate-50/0 focus:outline-none"
       />
-      <Image
+      <img
         onClick={sendMessageHandler}
         src="/images/send.svg"
         alt="send"

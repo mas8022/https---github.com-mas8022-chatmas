@@ -118,7 +118,7 @@
 .signUpBtn {
   border: 0px;
   border-radius: 20px;
-  height: 100%;
+  height: 5rem;
   width: 12rem;
   display: flex;
   align-items: center;
@@ -142,11 +142,6 @@
 }
 .signUpBtn:active {
   scale: 99%;
-}
-.lkgnsd {
-  width: 13rem;
-  height: 4rem;
-  border-radius: 20px;
 }
 .home {
   width: 100%;
