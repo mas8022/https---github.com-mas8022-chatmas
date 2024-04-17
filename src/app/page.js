@@ -2,10 +2,9 @@ import React from "react";
 import style from "../app/styles/home.module.css";
 import Navbar from "../../components/templates/navbar";
 import Search from "../../components/modules/search";
-import Timeline from "../../components/modules/timeline";
 import Welcome from "../../components/templates/welcome";
 import Me from "../../utils/me";
-import { getAllPosts } from "@/utils/postTools";
+import ShowRecentPost from "@/components/templates/showRecentPost";
 
 export default async function Home() {
   let Active = false;
@@ -13,21 +12,19 @@ export default async function Home() {
   if (user) {
     Active = true;
   }
-  const posts = await getAllPosts();
 
+  if (user) {
+    Active = true;
+  }
 
   return (
     <>
-      <Welcome Active={Active} />
+      <Welcome Active={JSON.parse(JSON.stringify(Active))} />
       <div className={style.home}>
-        <Navbar userId={user?._id}/>
+        <Navbar userId={user?._id} />
         <Search />
         {/* <StoreList /> */}
-        <div className="w-full flex flex-col gap-8 pb-[12rem]">
-          {posts && posts.length
-            ? posts.slice(0,10).map((post) => <Timeline post={post} />)
-            : null}
-        </div>
+        <ShowRecentPost />
       </div>
     </>
   );

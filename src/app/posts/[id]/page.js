@@ -14,9 +14,9 @@ export default async function Post({ params }) {
   return (
     <div className="w-full p-12 pb-[14rem] flex flex-col gap-8 items-center">
       {posts && posts.length ? (
-        posts.map((post) => <Timeline key={post._id} post={post} />)
+        posts.map((post) => <Timeline key={JSON.parse(JSON.stringify(post._id))} post={post} />)
       ) : (
-        <NoExist upload={false} />
+        <NoExist upload={JSON.parse(JSON.stringify(false))} />
       )}
     </div>
   );

@@ -6,8 +6,7 @@ function connectToDb() {
       return true;
     } else {
       mongoose.connect(
-        "mongodb://localhost:27017/mas-chat"
-        // "mongodb://root:KnbENcVBXwgMcampaYQVwtJL@k2.liara.cloud:34451/my-app?authSource=admin"
+        "mongodb://root:yNfEopgknnUiNDwtV0Tq1Iv4@annapurna.liara.cloud:32755/my-app?authSource=admin"
       );
     }
   } catch (error) {

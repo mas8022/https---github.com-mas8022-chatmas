@@ -51,11 +51,19 @@ export default async function Message({ params }) {
           ? allMessage.map((item) => {
               if (String(item.user) === String(me._id)) {
                 return (
-                  <Text subject={"me"} text={item.content} key={item._id} />
+                  <Text
+                    subject={"me"}
+                    text={JSON.parse(JSON.stringify(item.content))}
+                    key={item._id}
+                  />
                 );
               }
               return (
-                <Text subject={"you"} text={item.content} key={item._id} />
+                <Text
+                  subject={"you"}
+                  text={JSON.parse(JSON.stringify(item.content))}
+                  key={item._id}
+                />
               );
             })
           : null}

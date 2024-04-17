@@ -2,7 +2,6 @@ import React from "react";
 import style from "../../src/app/styles/timeline.module.css";
 import Link from "next/link";
 import MoreTimeLine from "./moreTimeLine";
-import Image from "next/image";
 
 export default function Timeline({ post }) {
   return (

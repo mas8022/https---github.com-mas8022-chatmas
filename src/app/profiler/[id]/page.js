@@ -18,7 +18,7 @@ export default async function Profiler({ params }) {
         />
         <span className="font-bold text-[1.8rem]">{user.userName}</span>
       </div>
-      <EditForm user={user} />
+      <EditForm user={JSON.parse(JSON.stringify(user))} />
     </div>
   );
 }

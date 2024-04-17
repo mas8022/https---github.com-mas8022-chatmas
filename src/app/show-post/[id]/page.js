@@ -23,7 +23,7 @@ export default async function ShowPost({ params }) {
       />
       <div className="w-full pb-5 flex justify-between border border-white/0 border-b-slate-700">
         <p className="text-[1.4rem] w-[87%] font-bold">{post.content}</p>
-        <Like postId={post._id} />
+        <Like postId={JSON.parse(JSON.stringify(post._id))} />
       </div>
       <div className="w-full flex flex-col gap-6">
         {comments && comments.length

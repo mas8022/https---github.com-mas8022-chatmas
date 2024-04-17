@@ -2,28 +2,24 @@
 import React, { useEffect, useState } from "react";
 import style from "../../src/app/styles/search.module.css";
 import Link from "next/link";
-import Image from "next/image";
+import { useQuery } from "react-query";
 
 export default function Search() {
   const [search, setSearch] = useState("");
-  const [users, setUsers] = useState([]);
   const [usersList, setUsersList] = useState([]);
 
-  useEffect(() => {
-    fetch("/api/users")
-      .then((res) => res.json())
-      .then((data) => setUsers(data));
-  }, [search]);
+  const { data } = useQuery("users", () =>
+    fetch("/api/users").then((res) => res.json())
+  );
 
   useEffect(() => {
-    if (users && users.length) {
-      const usersShow = users.filter((user) =>
-      user.userName.trim().toLowerCase().includes(search.trim().toLowerCase())
-    );
-    setUsersList(usersShow);
+    if (data && data.length) {
+      const usersShow = data.filter((user) =>
+        user.userName.trim().toLowerCase().includes(search.trim().toLowerCase())
+      );
+      setUsersList(usersShow);
     }
-  }, [users]);
-
+  }, [search]);
 
   return (
     <>
@@ -45,14 +41,24 @@ export default function Search() {
       <div className="w-full mb-16 rounded-b-2xl shadow-2xl flex flex-col gap-5">
         {search.trim() && usersList.length
           ? usersList.map((user) => (
-              <Link href={`contact/${user._id}`} key={user._id} className="w-full h-24  shadow-xl px-6 flex items-center justify-between">
+              <Link
+                href={`contact/${user._id}`}
+                key={user._id}
+                className="w-full h-24  shadow-xl px-6 flex items-center justify-between"
+              >
                 <div className="flex items-center gap-6">
                   <img
                     className="w-14 h-14 rounded-full"
-                    src={user.profileImage?user.profileImage:"/images/blank-profile-picture-973460_640.png"}
+                    src={
+                      user.profileImage
+                        ? user.profileImage
+                        : "/images/blank-profile-picture-973460_640.png"
+                    }
                     alt="user image"
                   />
-                  <span className="font-bold text-[1.3rem]">{user.userName}</span>
+                  <span className="font-bold text-[1.3rem]">
+                    {user.userName}
+                  </span>
                 </div>
                 <span className="text-[1.2rem]">online</span>
               </Link>
