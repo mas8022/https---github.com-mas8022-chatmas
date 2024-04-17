@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import styled from "@emotion/styled";
 import { Button } from "@mui/material";
 import { useFormik } from "formik";
@@ -10,8 +10,7 @@ import Swal from "sweetalert2";
 const emailRegex = /[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}/;
 
 export default function EditForm({ user }) {
-  let router = useRouter()
-
+  let router = useRouter();
   const VisuallyHiddenInput = styled("input")({
     clip: "rect(0 0 0 0)",
     clipPath: "inset(50%)",
@@ -25,12 +24,11 @@ export default function EditForm({ user }) {
   });
 
   const { userName, email, profileImage, phone } = user;
-
+  const [profileImagex, setProfileImagex] = useState(profileImage);
   const editProfile = useFormik({
     initialValues: {
       userName,
       email,
-      profileImage,
       phone,
     },
     validate: (values) => {
@@ -45,6 +43,12 @@ export default function EditForm({ user }) {
       return errors;
     },
     onSubmit: (values, { setSubmitting }) => {
+      const formData = new FormData();
+      formData.append("userName", values.userName);
+      formData.append("email", values.email);
+      formData.append("profileImage", profileImagex);
+      formData.append("phone", values.phone);
+
       swal({
         icon: "warning",
         text: "Are you sure of changing",
@@ -52,11 +56,8 @@ export default function EditForm({ user }) {
         if (result) {
           fetch(`/api/editProfile/${user._id}`, {
             method: "PUT",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify(values),
-          }).then(res => {
+            body: formData,
+          }).then((res) => {
             if (res.ok) {
               Swal.fire({
                 position: "top-end",
@@ -65,7 +66,7 @@ export default function EditForm({ user }) {
                 showConfirmButton: false,
                 timer: 1500,
               });
-            }else{
+            } else {
               Swal.fire({
                 position: "top-end",
                 icon: "error",
@@ -74,12 +75,11 @@ export default function EditForm({ user }) {
                 timer: 1500,
               });
             }
-          })
-          
-          router.refresh()
-          router.refresh()
-          router.refresh()
-          
+          });
+
+          router.refresh();
+          router.refresh();
+          router.refresh();
         }
       });
 
@@ -89,14 +89,10 @@ export default function EditForm({ user }) {
     },
   });
 
-  const handleImageChange = (event, setFieldValue) => {
-    const file = event.target.files[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onload = () => {
-        setFieldValue("profileImage", reader.result);
-      };
-      reader.readAsDataURL(file);
+  const handleImageChange = (event) => {
+    const { files } = event.target;
+    if (files[0]) {
+      setProfileImagex(files[0]);
     }
   };
 
@@ -149,11 +145,8 @@ export default function EditForm({ user }) {
         Upload Photo
         <VisuallyHiddenInput
           type="file"
-          name="profileImage"
           accept="image/*"
-          onChange={(event) =>
-            handleImageChange(event, editProfile.setFieldValue)
-          }
+          onChange={(event) => handleImageChange(event)}
         />
       </Button>
       <button

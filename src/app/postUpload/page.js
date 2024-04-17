@@ -9,41 +9,41 @@ import Swal from "sweetalert2";
 import { useRouter } from "next/navigation";
 
 export default function PostUpload() {
-  const route = useRouter()
-  const [cover, setCover] = useState('');
+  const route = useRouter();
+  const [cover, setCover] = useState("");
+  const [postImage, setPostImage] = useState("");
 
   const formik = useFormik({
     initialValues: {
-      postImage: "",
       content: "",
     },
-    validate: (values) => {
-      const errors = {};
-      if (!values.postImage.trim()) {
-        errors.postImage = "don`t upload any things";
-      }
-      return errors;
-    },
     onSubmit: async (values, { setSubmitting }) => {
+      const formData = new FormData();
+      formData.append("postImage", postImage);
+      formData.append("content", values.content);
 
-      await fetch("/api/post/upload", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(values),
-      }).then(async (res) => {
-        if (res.ok) {
-          await Swal.fire({
-            position: "top-end",
-            icon: "success",
-            title: "Upload post successfully",
-            showConfirmButton: false,
-            timer: 1500,
-          });
-          setCover("");
-          values.content = "";
-          route.refresh()
-        }
-      });
+      console.log(postImage);
+
+      if (postImage) {
+        await fetch("/api/post/upload", {
+          method: "POST",
+          body: formData,
+        }).then(async (res) => {
+          if (res.ok) {
+            await Swal.fire({
+              position: "top-end",
+              icon: "success",
+              title: "Upload post successfully",
+              showConfirmButton: false,
+              timer: 1500,
+            });
+            setCover("");
+            values.content = "";
+            route.refresh();
+          }
+        });
+      }
+
       setTimeout(() => {
         setSubmitting(false);
       }, 3000);
@@ -62,15 +62,10 @@ export default function PostUpload() {
     width: 1,
   });
 
-  const handleImageChange = (event, setFieldValue) => {
-    const file = event.target.files[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onload = () => {
-        setFieldValue("postImage", reader.result);
-        setCover(reader.result);
-      };
-      reader.readAsDataURL(file);
+  const handleImageChange = (event) => {
+    const { files } = event.target;
+    if (files[0]) {
+      setPostImage(files[0]);
     }
   };
 
@@ -86,14 +81,15 @@ export default function PostUpload() {
           component="label"
           variant="contained"
           startIcon={<CloudUploadIcon />}
-          style={cover?{ background: `url('${cover}')` }:{ background: "black" }}
+          style={
+            cover ? { background: `url('${cover}')` } : { background: "black" }
+          }
         >
           Upload file
           <VisuallyHiddenInput
             type="file"
-            name="postImage"
             accept="image/*"
-            onChange={(event) => handleImageChange(event, formik.setFieldValue)}
+            onChange={(event) => handleImageChange(event)}
           />
         </Button>
 

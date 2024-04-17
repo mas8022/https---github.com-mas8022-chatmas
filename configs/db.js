@@ -6,7 +6,7 @@ function connectToDb() {
       return true;
     } else {
       mongoose.connect(
-        "mongodb://root:yNfEopgknnUiNDwtV0Tq1Iv4@annapurna.liara.cloud:32755/my-app?authSource=admin"
+        "mongodb://root:M6OftCkxKGFU7l82zlnO2D2m@annapurna.liara.cloud:31867/my-app?authSource=admin"
       );
     }
   } catch (error) {

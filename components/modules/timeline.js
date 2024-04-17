@@ -7,11 +7,11 @@ export default function Timeline({ post }) {
   return (
     <div className={style.timeline}>
       <div className={style.timeline__top}>
-        <Link href={`/contact/${post.user._id}`} className={style.timeline__top__right}>
+        <Link href={`/contact/${post.user?._id}`} className={style.timeline__top__right}>
           <img
             src={
-              post.user.profileImage
-                ? post.user.profileImage
+              post.user?.profileImage
+                ? post.user?.profileImage
                 : "/images/images.jpg"
             }
             alt="store"
@@ -19,7 +19,7 @@ export default function Timeline({ post }) {
           />
           <div className={style.timeline__top__right__left}>
             <p className={style.fgfd}>
-              {post.user.userName ? post.user.userName : null}
+              {post.user?.userName ? post.user?.userName : null}
             </p>
             <p className={style.ertyre}>Mazandaran, Iran</p>
           </div>
