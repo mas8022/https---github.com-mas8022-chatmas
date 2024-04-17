@@ -1,17 +1,13 @@
-"use client";
 import React from "react";
 import Post from "../../../components/modules/post";
-import { useQuery } from "react-query";
+import { getAllPosts } from "@/utils/postTools";
 
-export default function Explorer() {
-  const { data } = useQuery("posts", () => {
-    fetch("/api/post/posts").then((res) => res.json());
-  });
-
+export default async function Explorer() {
+  const posts = await getAllPosts();
   return (
     <div className="w-full flex items-center">
       <div className="mx-auto pb-[8rem] grid grid-cols-3">
-        {data?.map((post) => (
+        {posts?.map((post) => (
           <Post
             key={post._id}
             hold={false}
