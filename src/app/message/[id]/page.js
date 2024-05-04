@@ -4,7 +4,6 @@ import MessageBox from "../../../../components/templates/messageBox";
 import userModel from "@/models/users";
 import chatModel from "@/models/chat";
 import Me from "@/utils/me";
-import Image from "next/image";
 
 export default async function Message({ params }) {
   const me = await Me();
@@ -26,6 +25,7 @@ export default async function Message({ params }) {
     .populate("messages");
 
   const allMessage = await messageArray?.messages;
+  
 
   return (
     <div className="w-full h-full flex items-center flex-col">

@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useFormik } from "formik";
 import { styled } from "@mui/material/styles";
 import Button from "@mui/material/Button";
@@ -13,6 +13,10 @@ export default function PostUpload() {
   const [cover, setCover] = useState("");
   const [postImage, setPostImage] = useState("");
 
+  useEffect(() => {
+    setCover("");
+  }, []);
+
   const formik = useFormik({
     initialValues: {
       content: "",
@@ -22,14 +26,14 @@ export default function PostUpload() {
       formData.append("postImage", postImage);
       formData.append("content", values.content);
 
-      console.log(postImage);
-
       if (postImage) {
         await fetch("/api/post/upload", {
           method: "POST",
           body: formData,
         }).then(async (res) => {
           if (res.ok) {
+            const imgRes = await res.json();
+            setCover(imgRes.imageSrc);
             await Swal.fire({
               position: "top-end",
               icon: "success",
@@ -37,7 +41,6 @@ export default function PostUpload() {
               showConfirmButton: false,
               timer: 1500,
             });
-            setCover("");
             values.content = "";
             route.refresh();
           }

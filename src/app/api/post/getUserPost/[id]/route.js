@@ -1,7 +1,9 @@
+import connectToDb from "@/configs/db";
 import postModel from "@/models/post";
 
 export async function GET(req, { params }) {
   try {
+    connectToDb()
     const posts = await postModel.find({ user: params.id });
     return Response.json(posts);
   } catch (error) {

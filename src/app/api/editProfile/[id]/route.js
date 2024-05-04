@@ -1,8 +1,9 @@
 import connectToDb from "../../../../../configs/db";
 import { generateToken } from "../../../../../utils/auth/sign";
 import userModel from "../../../../../models/users";
-import path from "path";
-import { writeFile } from "fs/promises";
+import sharp from "sharp";
+import { S3Client } from "@aws-sdk/client-s3";
+import FileResize from "@/utils/fileResizer";
 
 export async function PUT(req, { params }) {
   try {
@@ -12,13 +13,10 @@ export async function PUT(req, { params }) {
     const formData = await req.formData();
     const userName = formData.get("userName");
     const email = formData.get("email");
-    const profileImage = formData.get("profileImage");
     const phone = formData.get("phone");
+    const file = formData.get("profileImage");
 
-    const buffer = Buffer.from(await profileImage.arrayBuffer());
-    const filename = Date.now() + profileImage.name;
-    const imgPath = path.join(process.cwd(), "public/uploads/" + filename);
-    await writeFile(imgPath, buffer);
+    const { fileName } = await FileResize(file);
 
     const token = generateToken({ email });
     await userModel.findOneAndUpdate(
@@ -26,7 +24,7 @@ export async function PUT(req, { params }) {
       {
         userName,
         email,
-        profileImage: `http://localhost:3000/uploads/${filename}`,
+        profileImage: `https://maschatbucket.storage.iran.liara.space/${fileName}`,
         phone,
       },
       { new: true }
@@ -40,7 +38,6 @@ export async function PUT(req, { params }) {
       }
     );
   } catch (error) {
-    console.log("===>", error);
     return Response.json(
       { message: "Internal Server Error" },
       { status: 500, error }
