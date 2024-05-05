@@ -6,7 +6,7 @@ function connectToDb() {
       return true;
     } else {
       mongoose.connect(
-        "mongodb://root:HZV9waVfz7s0G8HcaGaVoY8D@eiger.liara.cloud:33653/my-app?authSource=admin"
+        "mongodb://root:UiGC1yuwQGhWZch36Plgg1Xr@eiger.liara.cloud:33956/my-app?authSource=admin"
       );
     }
   } catch (error) {
