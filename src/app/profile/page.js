@@ -8,7 +8,6 @@ import postModel from "../../../models/post";
 import NoExist from "@/components/modules/noExist";
 import followModel from "@/models/follow";
 import connectToDb from "@/configs/db";
-import Image from "next/image";
 
 export default async function Profile() {
   connectToDb();

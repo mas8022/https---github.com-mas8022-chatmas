@@ -21,7 +21,7 @@ export default async function Home() {
     <>
       <Welcome Active={JSON.parse(JSON.stringify(Active))} />
       <div className={style.home}>
-        <Navbar userId={user?._id} />
+        <Navbar userId={JSON.parse(JSON.stringify(user))?._id} />
         <Search />
         {/* <StoreList /> */}
         <ShowRecentPost />

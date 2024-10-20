@@ -1,5 +1,6 @@
 import connectToDb from "@/configs/db";
 import followModel from "@/models/follow";
+export const dynamic = "force-dynamic";
 
 export async function GET(req, { params }) {
   try {

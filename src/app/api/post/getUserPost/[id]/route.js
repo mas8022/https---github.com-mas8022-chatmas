@@ -1,5 +1,6 @@
 import connectToDb from "@/configs/db";
 import postModel from "@/models/post";
+export const dynamic = "force-dynamic";
 
 export async function GET(req, { params }) {
   try {

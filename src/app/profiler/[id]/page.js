@@ -2,7 +2,6 @@ import React from "react";
 import userModel from "../../../../models/users";
 import connectToDb from "../../../../configs/db";
 import EditForm from "../../../../components/templates/editForm";
-import Image from "next/image";
 
 export default async function Profiler({ params }) {
   connectToDb();

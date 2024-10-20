@@ -41,7 +41,6 @@ export default async function Message({ params }) {
           <span className="text-slate-700 font-extrabold text-[1.7rem]">
             {user.userName}
           </span>
-          <span className="text-[1.4rem] font-medium">online</span>
         </div>
       </div>
 

@@ -2,7 +2,12 @@
 const nextConfig = {
   output: "standalone",
   images: {
-    domains: ["dreamy-kapitsa-en-rdoemn.storage.iran.liara.space"], // Add the domain for remote images
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "maghaleh.storage.iran.liara.space",
+      },
+    ],
     loader: "default",
   },
 };

@@ -3,10 +3,10 @@ import React, { useEffect, useState } from "react";
 import { useFormik } from "formik";
 import { styled } from "@mui/material/styles";
 import Button from "@mui/material/Button";
-import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import Navbar from "../../../components/templates/navbar";
 import Swal from "sweetalert2";
 import { useRouter } from "next/navigation";
+import { revalidatePath } from "next/cache";
 
 export default function PostUpload() {
   const route = useRouter();
@@ -43,6 +43,7 @@ export default function PostUpload() {
             });
             values.content = "";
             route.refresh();
+            revalidatePath("/");
           }
         });
       }
@@ -83,12 +84,11 @@ export default function PostUpload() {
           className="w-full !bg-cover !rounded-2xl !bg-center h-[30rem] flex items-center justify-center font-light text-zinc-100 text-[2rem]"
           component="label"
           variant="contained"
-          startIcon={<CloudUploadIcon />}
           style={
             cover ? { background: `url('${cover}')` } : { background: "black" }
           }
         >
-          Upload file
+          {cover ? null : <span>Upload Your Photo </span>}
           <VisuallyHiddenInput
             type="file"
             accept="image/*"

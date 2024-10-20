@@ -1,6 +1,8 @@
 import Me from "@/utils/me";
 import favoriteModel from "@/models/favorite";
 import connectToDb from "@/configs/db";
+export const dynamic = "force-dynamic";
+
 export async function GET(req, { params }) {
   try {
     connectToDb();

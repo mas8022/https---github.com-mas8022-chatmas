@@ -1,6 +1,7 @@
 import Me from "@/utils/me";
 import ChatsModel from "@/models/chat";
 import MessagesModel from "@/models/message";
+
 export async function POST(req) {
   try {
     const user = await Me();

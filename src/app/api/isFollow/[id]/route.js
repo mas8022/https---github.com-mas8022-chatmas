@@ -1,5 +1,6 @@
 import Me from "@/utils/me";
 import followModel from "@/models/follow";
+export const dynamic = "force-dynamic";
 
 export async function GET(req, { params }) {
   let isFollow = false;

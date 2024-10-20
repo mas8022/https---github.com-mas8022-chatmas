@@ -1,6 +1,7 @@
 import Me from "@/utils/me";
 import followModel from "@/models/follow";
 import connectToDb from "@/configs/db";
+export const dynamic = "force-dynamic";
 
 export async function POST(req, { params }) {
   try {

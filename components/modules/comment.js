@@ -37,7 +37,7 @@ export default function Comment({ comment }) {
         href={`/contact/${"54rew"}`}
       >
         <img
-          src={comment.commenter.profileImage}
+          src={comment.commenter.profileImage ? comment.commenter.profileImage: "/images/images.jpg"}
           alt="commenter image"
           className="w-[6rem] h-[6rem] rounded-full"
         />

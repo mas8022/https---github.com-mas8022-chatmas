@@ -1,9 +1,9 @@
 import connectToDb from "../../../../../configs/db";
 import { generateToken } from "../../../../../utils/auth/sign";
 import userModel from "../../../../../models/users";
-import sharp from "sharp";
-import { S3Client } from "@aws-sdk/client-s3";
 import FileResize from "@/utils/fileResizer";
+
+export const dynamic = "force-dynamic";
 
 export async function PUT(req, { params }) {
   try {
@@ -24,7 +24,7 @@ export async function PUT(req, { params }) {
       {
         userName,
         email,
-        profileImage: `https://maschatbucket.storage.iran.liara.space/${fileName}`,
+        profileImage: `https://maghaleh.storage.iran.liara.space/${fileName}`,
         phone,
       },
       { new: true }

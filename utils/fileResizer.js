@@ -1,6 +1,6 @@
-import React from "react";
 import { PutObjectCommand, S3Client } from "@aws-sdk/client-s3";
 import sharp from "sharp";
+
 export default async function FileResize(file) {
   const s3 = await new S3Client({
     region: "default",

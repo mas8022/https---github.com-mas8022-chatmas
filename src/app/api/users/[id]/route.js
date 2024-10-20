@@ -1,5 +1,6 @@
 const { default: connectToDb } = require("../../../../../configs/db");
 import userModel from "../../../../../models/users";
+export const dynamic = "force-dynamic";
 
 export async function GET(req,{params}) {
   try {
