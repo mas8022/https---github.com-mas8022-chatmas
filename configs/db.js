@@ -6,7 +6,7 @@ function connectToDb() {
       return true;
     } else {
       mongoose.connect(
-        "mongodb://root:DZvr0vZAfd81qjczwngyO0LI@lhotse.liara.cloud:31341/my-app?authSource=admin&replicaSet=rs0&directConnection=true"
+        "mongodb://localhost:27017/maschat"
       );
     }
   } catch (error) {
